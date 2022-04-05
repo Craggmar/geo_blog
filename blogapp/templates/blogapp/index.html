@@ -1,0 +1,17 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+<h3>Blogapp index - Strona główna</h3>
+
+<p> Lista tematów</p>
+
+<ul>
+  {% for topic in topics %}
+    <li>
+      <a href="{% url 'blogapp:topic' topic.id %}">{{ topic }}</a>
+    </li>
+  {% empty %}
+    <li>No topics found</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

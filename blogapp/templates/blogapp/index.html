@@ -7,11 +7,17 @@
 <ul>
   {% for topic in topics %}
     <li>
-      <a href="{% url 'blogapp:topic' topic.id %}">{{ topic }}</a>
+      <a href="{% url 'blogapp:topic' topic.id %}">{{ topic.title }} - {{topic.id}}</a>
     </li>
   {% empty %}
-    <li>No topics found</li>
+    <li>
+      No topics found
+    </li>
   {% endfor %}
+    <br>
+    <li>
+      <a href="{% url 'blogapp:new_topic' %}">Add topic</a>
+    </li>
 </ul>
 
 {% endblock content %}

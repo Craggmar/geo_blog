@@ -1,0 +1,9 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+<h2>Czy na pewno chcesz usunąć temat: {{topic.title}}?</h2>
+
+<form action="{% url 'blogapp:delete_topic' topic.id %}" method = 'post'>
+    {% csrf_token %}{{form.as_p}}
+    <button name = 'submit'>Usuń temat</button>
+</form>
+{% endblock content %}

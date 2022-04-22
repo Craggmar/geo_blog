@@ -16,11 +16,11 @@ def topic(request, topic_id):
     topic = Topic.objects.get(id = topic_id)
     comments = topic.comment_set.order_by('-date_created')
 
-    #Show last change date and string
-    if topic.date_created == topic.date_modified:
-        last_change_date_str =  'Utworzono: '+ topic.date_created.strftime('%m-%d-%y; %H:%M')
+#Show last change date and string
+    if topic.date_modified > topic.date_created:
+        last_change_date_str =  'Ostatnio zmodyfikowano: '+ topic.date_modified.strftime('%m-%d-%y; %H:%M')
     else:
-        last_change_date_str = 'Ostatnio zmodyfikowano: '+ topic.date_modified.strftime('%m-%d-%y; %H:%M') 
+        last_change_date_str =  'Utworzono: '+ topic.date_created.strftime('%m-%d-%y; %H:%M')
 
     #Add new comment form
     if request.method != 'POST':
@@ -31,9 +31,10 @@ def topic(request, topic_id):
             new_comment = form.save(commit=False)
             new_comment.topic = topic
             new_comment.save()
+        return redirect('blogapp:topic', topic.id)
 
     context = {
-        'topic': topic, 'comments': comments, 'form': form, 'last_change_date_str': last_change_date_str
+        'topic': topic, 'comments': comments, 'form': form, 'date':last_change_date_str,
         }
 
 

@@ -1,6 +1,13 @@
 <p>
     <a href="{% url 'blogapp:index' %}">Strona główna</a>
     <a href="{% url 'blogapp:about' %}">O stronie</a>
+    {% if user.is_authenticated %}
+        Witaj, {{user.username}}.
+        <a href="{% url 'users:logout' %}">Wyloguj</a>
+    {% else %}
+        <a href="{% url 'users:login' %}">Zaloguj</a>
+        <a href="{% url 'users:register' %}">Zarejestruj się</a>
+    {% endif %}
 </p>
 
 {% block content %}{% endblock content %}

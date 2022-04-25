@@ -1,5 +1,7 @@
 from datetime import date
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Topic
 from .forms import CommentForm, TopicForm
@@ -15,13 +17,16 @@ def about(request):
 def topic(request, topic_id):
     topic = Topic.objects.get(id = topic_id)
     comments = topic.comment_set.order_by('-date_created')
+    #change comment date format
+    for comment in comments:
+        comment.date_created = comment.date_created.strftime('%m-%d-%y; %H:%M')
 
-#Show last change date and string
+    #Show last topic change date string
     if topic.date_modified > topic.date_created:
         last_change_date_str =  'Ostatnio zmodyfikowano: '+ topic.date_modified.strftime('%m-%d-%y; %H:%M')
     else:
         last_change_date_str =  'Utworzono: '+ topic.date_created.strftime('%m-%d-%y; %H:%M')
-
+    
     #Add new comment form
     if request.method != 'POST':
         form = CommentForm()
@@ -30,29 +35,33 @@ def topic(request, topic_id):
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.topic = topic
+            new_comment.owner = request.user
             new_comment.save()
         return redirect('blogapp:topic', topic.id)
 
     context = {
         'topic': topic, 'comments': comments, 'form': form, 'date':last_change_date_str,
-        }
-
+         }     
 
     return render(request, 'blogapp/topic.html', context)
 
+@login_required
 def new_topic(request):
     if request.method != 'POST':
         form = TopicForm()
     else:
         form = TopicForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner= request.user
+            new_topic.save()
             return redirect('blogapp:index')
 
     context = {'form': form}
 
     return render(request, 'blogapp/new_topic.html', context)
 
+@login_required
 def edit_topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
 
@@ -66,6 +75,7 @@ def edit_topic(request, topic_id):
     context = {'topic':topic, 'form':form}
     return render(request, 'blogapp/edit_topic.html', context)
 
+@login_required
 def delete_topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     if request.method =='POST':
@@ -73,6 +83,7 @@ def delete_topic(request, topic_id):
         return redirect('blogapp:index')
 
     context = {'topic':topic}
+    
     return render(request, 'blogapp/delete_topic.html', context)
 
         

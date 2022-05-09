@@ -1,4 +1,3 @@
-from datetime import date
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
@@ -23,9 +22,9 @@ def topic(request, topic_id):
 
     #Show last topic change date string
     if topic.date_modified > topic.date_created:
-        last_change_date_str =  'Ostatnio zmodyfikowano: '+ topic.date_modified.strftime('%m-%d-%y; %H:%M')
+        last_change_date_str =  'Ostatnio zmodyfikowano: '+ topic.date_modified.strftime('%m-%d-%y o %H:%M')
     else:
-        last_change_date_str =  'Utworzono: '+ topic.date_created.strftime('%m-%d-%y; %H:%M')
+        last_change_date_str =  'Utworzono: '+ topic.date_created.strftime('%m-%d-%y o %H:%M')
     
     #Add new comment form
     if request.method != 'POST':
@@ -41,8 +40,7 @@ def topic(request, topic_id):
 
     context = {
         'topic': topic, 'comments': comments, 'form': form, 'date':last_change_date_str,
-         }     
-
+         }
     return render(request, 'blogapp/topic.html', context)
 
 @login_required

@@ -15,9 +15,13 @@
     </li>
   {% endfor %}
     <br>
+  {% if user.is_authenticated %}
     <li>
       <a href="{% url 'blogapp:new_topic' %}">Add topic</a>
     </li>
+  {% else %}
+    Zaloguj się aby móc dodawać tematy    
+  {% endif %}
 </ul>
 
 {% endblock content %}

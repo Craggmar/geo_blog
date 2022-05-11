@@ -3,9 +3,9 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-12 my-1 text-center bg-info">
-    <img src=" {% static 'images/header.png' %}" width="20%">
-    <h1 class="h1 font-weight-normal">{{topic.title|capfirst}}</h1>
+  <div class="col-12 my-1 text-center article">
+    <!-- <img src=" {% static 'images/header.png' %}" width="20%"> -->
+    <h1 class="h1 font-weight-normal text-capitalize">{{topic.title}}</h1>
     <h5>{{topic.description}}</h5>
     <p class="text-end">
       {{date}} przez <b>{{topic.owner}}</b>
@@ -15,8 +15,8 @@
       {% endif %}
     </p>
   </div>
-  <div class="col-lg-8 article">aa</div> 
-  <div class="col-lg-4 bg-secondary">bb</div>
+  <div class="col-lg-9 text-justify">{{topic.text|safe}}</div> 
+  <div class="col-lg-3 border">#######</div>
 </div>
 
 <!-- <h2>{{topic.title}}</h2>

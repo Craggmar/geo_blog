@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
+from blog.settings import BASE_DIR
+import os
+import shutil
 
 from .models import Topic
 from .forms import CommentForm, TopicForm
+
+PROJECT_PATH = os.path.abspath(os.path.dirname('blog'))
+IMG_PATH= os.path.join(PROJECT_PATH, 'static/images/')
+
 
 def index(request):
     topics = Topic.objects.order_by('date_created')
@@ -38,8 +44,14 @@ def topic(request, topic_id):
             new_comment.save()
         return redirect('blogapp:topic', topic.id)
 
+    #Image list links
+    images = os.listdir('static/images/'+topic.title)
+    imgs_list_dir = [IMG_PATH+topic.title+'/'+img for img in images]
+    
+
+
     context = {
-        'topic': topic, 'comments': comments, 'form': form, 'date':last_change_date_str,
+        'topic': topic, 'comments': comments, 'form': form, 'date':last_change_date_str,'images':imgs_list_dir,
          }
     return render(request, 'blogapp/topic.html', context)
 
@@ -53,6 +65,8 @@ def new_topic(request):
             new_topic = form.save(commit=False)
             new_topic.owner= request.user
             new_topic.save()
+            path= os.getcwd()
+            os.mkdir(IMG_PATH+new_topic.title)
             return redirect('blogapp:index')
 
     context = {'form': form}
@@ -78,6 +92,7 @@ def delete_topic(request, topic_id):
     topic = Topic.objects.get(id=topic_id)
     if request.method =='POST':
         topic.delete()
+        shutil.rmtree(IMG_PATH+topic.title)
         return redirect('blogapp:index')
 
     context = {'topic':topic}

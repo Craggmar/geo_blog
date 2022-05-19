@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Topic, Comment
+from .models import Topic, Comment, Image
 
 class TopicAdmin(admin.ModelAdmin):
     list_display= ['id', 'title', 'date_created', 'date_modified']

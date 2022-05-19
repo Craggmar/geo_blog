@@ -3,56 +3,129 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-12 mt-1 mb-5 header">
-    <h1 class="h1 font-weight-normal text-capitalize">{{topic.title}}</h1>
-    <div class="align-items-end">
-      <div class="float-start">
-        {{date}} przez <b>{{topic.owner}}</b>
-      </div>
+  <div class="col-12 position-relative mt-1 mb-5 header">   
+      <span class="position-absolute bottom-0 start-0">
+       <h6 class="m-2">
+         {% if topic.date_created <= topic.date_modified %}
+         Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
+         {% else %}
+         Ostatnio zmodyfikowano: <b>{{topic.date_modified|date:"d-m-y"}}</b>; <b>{{topic.date_modified|time:"H:i"}}</b>
+         {% endif %}
+         przez: <b>{{topic.owner}}</b>
+        </h6>
+      </span>
       {% if user == topic.owner %}
-        <div class="float-start">
+        <span class="position-absolute top-0 end-0 m-2">
+          <a href="{% url 'blogapp:add_image' topic.id %}">Dodaj zdjęcie</a>
           <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
           <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
-        </div>
+        </span>
       {% endif %}  
-    </div>
   </div>
-  <div class="col-lg-9 px-4">
-    <div><h2 class="h3">{{topic.description}}</h2></div>
-    <br><br>
-    <div class="pb-5">{{topic.text|safe}}
+  <div class="col-lg-9 px-4 mb-5">
+    <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
+    <div class="pb-5 mt-5">
+      {{topic.text|safe}}
     </div>
-    <div class="pb-5">
-      <h5>Komentarze:</h5>
-      <ul>
+    <div class="mt-5">
+      <h5>Komentarze:</h5>      
+      <ul class="list-unstyled">
         {% for comment in comments %}
           <li>
-            <div class="p-2">
-              <div class=" pb-1">{{ comment.text }} </div>
-              <div class="ml-auto">Wysłano: <b>{{comment.date_created}}</b> przez: <b>{{comment.owner}}</b></div>
+            <div class="clearfix mb-4">
+              <div class="float-start">
+                <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/default_user.png' %}" alt="User_image">
+              </div>
+              <div class="overflow-hidden ps-2">
+                <div class="user_comment_field">{{ comment.text }}</div>
+                <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b> przez: <b>{{comment.owner}}</b></span>
+              </div>
             </div>
           </li>
         {% empty %}
           <li>No comments found</li>
         {% endfor %}
       </ul>
+    </div>
+    <div>
       <br>
       {% if user.is_authenticated %}
       <form action="{% url 'blogapp:topic' topic.id %}" method = 'post'>
-        {% csrf_token %}{{form.as_p}}
-        <button name ='submit'>Dodaj komentarz</button>
+        <div class="m-0">
+          {% csrf_token %}{{form.as_p}}
+          <button type ='submit' class="btn btn-primary">Dodaj komentarz</button>
+        </div>
       </form>
       {% else %}
-      <p>Musisz być zalogowany aby móc dodawać komentarze.</p>
+      <b>Musisz być zalogowany aby móc dodawać komentarze. </b>
       {% endif %}
     </div>
   </div>
-  <div class="col-lg-3">
-      
+  <div class="col-lg-3">      
     {% for image in images %}
-      <img class="img-thumbnail" src="{% static image %}">
+      <img class="img-thumbnail" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{% static image %}">
+      
     {% endfor %}
+  </div>  
+
+
+  <div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+
+      {% for image in images %}
+      
+
+      <div class="mySlides">
+        <div class="numbertext">abc</div>
+        <img src="{% static image %}" style="width:100%">
+      </div>
+
+      {% endfor %}
+    </div>
   </div>
-  
+    <script>
+      // Open the Modal
+      function openModal() {
+        document.getElementById("myModal").style.display = "block";
+      }
+      
+      // Close the Modal
+      function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+      }
+      
+      var slideIndex = 1;
+      showSlides(slideIndex);
+      
+      // Next/previous controls
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+      
+      // Thumbnail image controls
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+      }
+      </script>
+
 </div>
 {% endblock content %}

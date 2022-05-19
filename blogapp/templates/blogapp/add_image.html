@@ -1,0 +1,10 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+<h2>New image for {{topic.title}}</h2>
+
+<form action="{% url 'blogapp:add_image' topic.id %}" method = 'post'>
+    {% csrf_token %}{{form.as_p}}
+    <button name = 'submit'>Dodaj zdjęcie</button>
+</form>
+
+{% endblock content %}

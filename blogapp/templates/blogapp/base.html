@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        
         <title>Geoblog</title>
 
         {% bootstrap_css %}
@@ -15,8 +16,8 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-md navbar_color navbar-light">
-                <a class="navbar-brand" href="{% url 'blogapp:index' %}">Geoblog</a> 
+            <nav class="navbar navbar-expand-md navbar_color navbar-light navbar_font">
+                <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:index' %}"><img class="img-fluid logo" src="{% static 'images/logo.png' %}" alt="LOGO"></a> 
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
                 aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -25,21 +26,26 @@
 
                 <div class="collapse navbar-collapse" id="mainmenu">
                     <ul class="navbar-nav me-auto">
+                        <li><hr class="dropdown-divider"></li>
                         <li class="nav-item">
                             <a class ="nav-link" href="{% url 'blogapp:index' %}">Strona główna</a>
                         </li>
                         <li class="nav-item">
                             <a class ="nav-link" href="{% url 'blogapp:about' %}">O stronie</a>
                         </li>
+                        <li class="nav-item">
+                            <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
                     </ul>
 
-                    <ul class="navbar-nav ">
+                    <ul class="navbar-nav me-3">
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
+                        <li class="nav-item mt-2 me-2">
                             Witaj, {{user.username}}.
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logout' %}">Wyloguj</a>
+                            <a class="nav-link" href="{% url 'users:logged_out' %}">Wyloguj</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
@@ -50,9 +56,6 @@
                         </li>
                         {% endif %}    
                     </ul>
-                    
-                    
-
                 </div>
 
             </nav>   

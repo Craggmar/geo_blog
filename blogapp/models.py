@@ -10,9 +10,10 @@ class Topic(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    header_image = models.ImageField(null=True, default='default_topic_image.png')
 
     def __str__(self):
-        print(self.text[:40]+'...')
+        return self.text[:500] + '...'
 
 
 class Comment(models.Model):
@@ -22,9 +23,13 @@ class Comment(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
+def topic_images_path(instance, filename):
+    return "{}/{}".format(instance.topic.title, filename)
+
 class Image(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
-    image = models.ImageField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=topic_images_path)
+
 

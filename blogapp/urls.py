@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     #About
     path('about/', views.about, name='about'),
-    #Galeria
+    #Gallery
     path('gallery/', views.gallery, name='gallery'),
     #Single Topic
     path('topics/(<int:topic_id>)/', views.topic, name='topic'),
@@ -18,8 +18,7 @@ urlpatterns = [
     path('edit_topic/(<int:topic_id>)/', views.edit_topic, name='edit_topic'),
     #Delete
     path('delete_topic/(<int:topic_id>)/', views.delete_topic, name='delete_topic'),
-    #addimage
+    #add image
     path('add_image/(<int:topic_id>)/', views.add_image, name='add_image'),
     
-
 ]

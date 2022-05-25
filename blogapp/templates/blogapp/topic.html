@@ -16,11 +16,11 @@
       </span>
       {% if user == topic.owner %}
         <span class="position-absolute top-0 end-0 m-2">
-          <a href="{% url 'blogapp:add_image' topic.id %}">Dodaj zdjęcie</a>
+          <a href="{% url 'blogapp:add_image' topic.id %}">Zmień zdjęcie</a>
           <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
           <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
         </span>
-      {% endif %}  
+      {% endif %}
   </div>
   <div class="col-lg-9 px-4 mb-5">
     <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
@@ -37,7 +37,7 @@
                 <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/default_user.png' %}" alt="User_image">
               </div>
               <div class="overflow-hidden ps-2">
-                <div class="user_comment_field">{{ comment.text }}</div>
+                <div class="user_comment_field p-2">{{ comment.text }}</div>
                 <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b> przez: <b>{{comment.owner}}</b></span>
               </div>
             </div>
@@ -52,7 +52,8 @@
       {% if user.is_authenticated %}
       <form action="{% url 'blogapp:topic' topic.id %}" method = 'post'>
         <div class="m-0">
-          {% csrf_token %}{{form.as_p}}
+          {% csrf_token %}{{form}}
+          <br>
           <button type ='submit' class="btn btn-primary">Dodaj komentarz</button>
         </div>
       </form>
@@ -63,9 +64,11 @@
   </div>
   <div class="col-lg-3">      
     {% for image in images %}
-      <img class="img-thumbnail" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{% static image %}">
-      
+      <img class="img-thumbnail" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{% static image %}">   
     {% endfor %}
+    {% if user == topic.owner %}
+          <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1  ">Dodaj zdjęcie</p></a>
+      {% endif %}
   </div>  
 
 

@@ -1,27 +1,40 @@
 {% extends 'blogapp/base.html' %}
+{% load static %}
+
 {% block content %}
-<h3>Blogapp index - Strona główna</h3>
+  <h1>Blogapp index - Strona główna</h1>
 
-<p> Lista tematów</p>
+  <h2> Lista tematów</h2>
 
-<ul>
-  {% for topic in topics %}
-    <li>
-      <a href="{% url 'blogapp:topic' topic.id %}">{{ topic.title }} - {{topic.id}}</a>
-    </li>
-  {% empty %}
-    <li>
-      No topics found
-    </li>
-  {% endfor %}
-    <br>
-  {% if user.is_authenticated %}
-    <li>
-      <a href="{% url 'blogapp:new_topic' %}">Add topic</a>
-    </li>
-  {% else %}
-    Zaloguj się aby móc dodawać tematy    
-  {% endif %}
-</ul>
+  <ul class="list-unstyled">
+    {% for topic in topics %}
+      <li class="mb-4">
+        <div class="row g-0 bg-light position-relative">
+          <div class="col-md-6 mb-md-0 p-md-4">
+              <img class="img-fluid" src="{{ topic.header_image.url }}">
+          </div>
+          <div class="col-md-6 p-4 ps-md-0">
+            <h2 class="mt-0 text-center text-capitalize" >{{topic.title}}</h2>
+            <h5>{{topic.description}}</h5>
+            <p>{{topic}}</p>
+            <a href="{% url 'blogapp:topic' topic.id %}" class="stretched-link"><p class="text-end">Czytaj dalej</p></a>
+          </div>
+        </div>
+      </li>
+    {% empty %}
+      <li>
+        No topics found
+      </li>
+    {% endfor %}
+      <br>
+    {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'blogapp:new_topic' %}">Add topic</a>
+      </li>
+    {% else %}
+      Zaloguj się aby móc dodawać tematy    
+    {% endif %}
+  </ul>
 
 {% endblock content %}
+

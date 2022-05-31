@@ -2,7 +2,7 @@
 {% block content %}
 <h2>Edit topic {{topic.title}}</h2>
 
-<form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post'>
+<form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post' enctype="multipart/form-data">
     {% csrf_token %}{{form.as_p}}
     <button name = 'submit'>Zapisz</button>
 </form>

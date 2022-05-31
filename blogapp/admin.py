@@ -8,7 +8,10 @@ class TopicAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display= ['id', 'topic', 'topic', 'text', 'date_created']
 
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'image', 'topic']
+
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Image)
+admin.site.register(Image, ImageAdmin)
 

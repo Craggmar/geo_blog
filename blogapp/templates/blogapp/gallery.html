@@ -1,18 +1,49 @@
 {% extends 'blogapp/base.html' %}
 {% load static %}
+
 {% block content %}
-<h2>Galeria</h2>
 
-{{images}}
-<div class="row">    
-{% for image in images %}
+<h2 class="h1 text-center mb-5">Galeria</h2>
+
+<div class="row">
+           
+  {% for image in images %}
+    <div class="col-xl-4 col-md-6 col-sm-12">     
+        <img id= "myImg{{image.id}}" class="img-fluid myImg" src="{{image.image.url}}" alt="{{image.description}}">
+      <p class="text-center text-capitalize">{{image.name}}</p>
+    </div>
+
+    <div id="myModal{{image.id}}" class="modal">
+      <span id="close{{image.id}}" class="close">&times;</span>
+      <img class="modal-content" id="img{{image.id}}">
+      <div id="caption{{image.id}}" class="caption"></div>
+    </div>
+ 
+    <script>
+    // Get the modal
+    var modal = document.getElementById('myModal{{image.id}}');
     
-        <img class="img-fluid gallery-image" src="{% static image %}">
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('myImg{{image.id}}');
+    var modalImg = document.getElementById("img{{image.id}}");
+    var captionText = document.getElementById("caption{{image.id}}");
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
     
-      
-{% endfor %} 
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("close{{image.id}}");
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+      modal.style.display = "none";
+    }
+    </script>
 
-</div>
+  {% endfor %}
 
+  </div>
 
 {% endblock content %}

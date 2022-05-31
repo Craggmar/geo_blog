@@ -3,50 +3,55 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-12 position-relative mt-1 mb-5 header">   
+  <!-- HEADER -->
+  <div class="col-12 position-relative mt-1 mb-5 header">
+      <img class="img-fluid header_image" src="{{topic.header_image.url}}">
       <span class="position-absolute bottom-0 start-0">
-       <h6 class="m-2">
+       <p>
          {% if topic.date_created <= topic.date_modified %}
          Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
          {% else %}
          Ostatnio zmodyfikowano: <b>{{topic.date_modified|date:"d-m-y"}}</b>; <b>{{topic.date_modified|time:"H:i"}}</b>
          {% endif %}
          przez: <b>{{topic.owner}}</b>
-        </h6>
+       </p>
       </span>
       {% if user == topic.owner %}
         <span class="position-absolute top-0 end-0 m-2">
-          <a href="{% url 'blogapp:add_image' topic.id %}">Zmień zdjęcie</a>
+          <a href="{% url 'blogapp:add_image' topic.id %}"> Zmień zdjęcie</a>
           <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
           <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
         </span>
       {% endif %}
   </div>
+  <!-- MAIN ARTICLE -->
   <div class="col-lg-9 px-4 mb-5">
     <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
     <div class="pb-5 mt-5">
       {{topic.text|safe}}
     </div>
+    <!-- COMMENTS SECTION -->
     <div class="mt-5">
       <h5>Komentarze:</h5>      
       <ul class="list-unstyled">
         {% for comment in comments %}
-          <li>
-            <div class="clearfix mb-4">
-              <div class="float-start">
-                <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/default_user.png' %}" alt="User_image">
-              </div>
-              <div class="overflow-hidden ps-2">
-                <div class="user_comment_field p-2">{{ comment.text }}</div>
-                <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b> przez: <b>{{comment.owner}}</b></span>
-              </div>
+        <li>
+          <div class="clearfix mb-4">
+            <div class="float-start">
+              <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/_defaults/default_user.png' %}" alt="User_image">
             </div>
-          </li>
+            <div class="overflow-hidden ps-2">
+              <div class="user_comment_field p-2">{{ comment.text }}</div>
+              <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b> przez: <b>{{comment.owner}}</b></span>
+            </div>
+          </div>
+        </li>
         {% empty %}
           <li>No comments found</li>
         {% endfor %}
       </ul>
     </div>
+    <!-- ADD COMMENT FORM -->
     <div>
       <br>
       {% if user.is_authenticated %}
@@ -62,73 +67,50 @@
       {% endif %}
     </div>
   </div>
-  <div class="col-lg-3">      
-    {% for image in images %}
-      <img class="img-thumbnail" onclick="openModal();currentSlide(1)" class="hover-shadow" src="{% static image %}">   
-    {% endfor %}
+  <!-- SIDE IMAGES BAR -->
+  <div class="col-lg-3">
+    {% if images %}   
+      {% for image in images %}
+        <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}">
+        <p class ="m-0 p-0 text-center">{{image.name}}</p>
+
+        <div id="myModal{{image.id}}" class="modal">
+          <span id="close{{image.id}}" class="close">&times;</span>
+          <img class="modal-content" id="img{{image.id}}">
+          <div id="caption{{image.id}}" class="caption"></div>
+        </div>
+     
+        <script>
+        // Get the modal
+        var modal = document.getElementById('myModal{{image.id}}');
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg{{image.id}}');
+        var modalImg = document.getElementById("img{{image.id}}");
+        var captionText = document.getElementById("caption{{image.id}}");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("close{{image.id}}");
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+          modal.style.display = "none";
+        }
+        </script>
+      {% endfor %}
+    {% else %}
+      <img class="img-thumbnail" src=" {% static default_topic_image.png %}">
+    {% endif %}
     {% if user == topic.owner %}
-          <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1  ">Dodaj zdjęcie</p></a>
-      {% endif %}
+      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1">Dodaj zdjęcie</p></a>
+    {% endif %}
   </div>  
 
-
-  <div id="myModal" class="modal">
-    <span class="close cursor" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-
-      {% for image in images %}
-      
-
-      <div class="mySlides">
-        <div class="numbertext">abc</div>
-        <img src="{% static image %}" style="width:100%">
-      </div>
-
-      {% endfor %}
-    </div>
-  </div>
-    <script>
-      // Open the Modal
-      function openModal() {
-        document.getElementById("myModal").style.display = "block";
-      }
-      
-      // Close the Modal
-      function closeModal() {
-        document.getElementById("myModal").style.display = "none";
-      }
-      
-      var slideIndex = 1;
-      showSlides(slideIndex);
-      
-      // Next/previous controls
-      function plusSlides(n) {
-        showSlides(slideIndex += n);
-      }
-      
-      // Thumbnail image controls
-      function currentSlide(n) {
-        showSlides(slideIndex = n);
-      }
-      
-      function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("demo");
-        var captionText = document.getElementById("caption");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-        captionText.innerHTML = dots[slideIndex-1].alt;
-      }
-      </script>
 
 </div>
 {% endblock content %}

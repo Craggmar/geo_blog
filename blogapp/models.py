@@ -10,10 +10,10 @@ class Topic(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    header_image = models.ImageField(null=True, default='default_topic_image.png')
+    header_image = models.ImageField(null=True, default='_defaults/default_topic_image.png')
 
     def __str__(self):
-        return self.text[:500] + '...'
+        return self.title.capitalize()
 
 
 class Comment(models.Model):

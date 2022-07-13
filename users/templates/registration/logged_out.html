@@ -1,6 +1,21 @@
 {% extends 'blogapp/base.html' %}
 {% block content %}
 
-<p>Zostałeś poprawnie wylogowany.</p>
+<div class="alert alert-success text-center mt-1" role="alert">
+  <p class="fw-bold">Zostałeś poprawnie wylogowany. Powrót do strony głównej nastąpi za:</p>
+  <div class= "fw-bold fs-4 mb-2" id="counter" class="">7</div>
+  <a class ="alert-link" href="{% url 'blogapp:home' %}">Powrót do strony głównej</a>
+</div>
+
+<script>
+  setInterval(function() {
+    var div = document.querySelector("#counter");
+    var count = div.textContent * 1 - 1;
+    div.textContent = count;
+    if (count <= 0) {
+        window.location.replace("{% url 'blogapp:home' %}");
+    }
+  }, 1000);
+</script>
 
 {% endblock content %}

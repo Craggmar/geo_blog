@@ -1,9 +1,13 @@
 {% extends 'blogapp/base.html' %}
 {% block content %}
-<h2>Czy na pewno chcesz usunąć temat: {{topic.title}}?</h2>
+
+<div class="alert alert-danger text-center mt-1" role="alert">
+    <p class="fw-bold">Czy na pewno chcesz usunąć "{{topic.title}}"?<p> 
+    <a class ="alert-link" href="{% url 'blogapp:home' %}">Powrót do strony głównej</a>
+  </div>
 
 <form action="{% url 'blogapp:delete_topic' topic.id %}" method = 'post'>
     {% csrf_token %}{{form.as_p}}
-    <button name = 'submit'>Usuń temat</button>
+    <button type="sumbit" class="btn btn-danger mt-3 position-absolute start-50 translate-middle" name='submit'>Usuń temat</button>
 </form>
 {% endblock content %}

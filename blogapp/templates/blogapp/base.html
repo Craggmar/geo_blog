@@ -1,70 +1,96 @@
-{% load bootstrap5 %}
 {% load static %}
 
 <!doctype html>
 <html lang="pl">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-        
-        <title>Geoblog</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/web.css' %}">
+    <title>Geoblog</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark text-light user-select-none">
+      <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:home' %}"><img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"></a> 
 
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
+      aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon" ></span>
+      </button>
 
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-md navbar_color navbar-light navbar_font">
-                <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:index' %}"><img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"></a> 
+      <div class="collapse navbar-collapse" id="mainmenu">
+        <ul class="navbar-nav me-auto">
+          <li><hr class="dropdown-divider"></li>
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'blogapp:home' %}">Strona główna</a>
+          </li>
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'blogapp:about' %}">O stronie</a>
+          </li>
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
+          </li>
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'api:api' %}">Api</a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+        </ul>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
-                aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation"> 
-                    <span class="navbar-toggler-icon" ></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="mainmenu">
-                    <ul class="navbar-nav me-auto">
-                        <li><hr class="dropdown-divider"></li>
-                        <li class="nav-item">
-                            <a class ="nav-link" href="{% url 'blogapp:index' %}">Strona główna</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class ="nav-link" href="{% url 'blogapp:about' %}">O stronie</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                    </ul>
-
-                    <ul class="navbar-nav me-3">
-                        {% if user.is_authenticated %}
-                        <li class="nav-item mt-2 me-2">
-                            Witaj, {{user.username}}.
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:logged_out' %}">Wyloguj</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class ="nav-link" href="{% url 'users:login' %}">Zaloguj</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class ="nav-link" href="{% url 'users:register' %}">Zarejestruj się</a>
-                        </li>
-                        {% endif %}    
-                    </ul>
-                </div>
-
-            </nav>   
-        </header>
-        <main>                
-            <div class="container mt-5">
-               {% block content %}{% endblock content %}           
-                
+        <ul class="navbar-nav me-3">
+          {% if user.is_authenticated %}
+          <li class="nav-item mt-2 me-2">
+            Witaj, {{user.username}}.
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:logged_out' %}">Wyloguj się</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'users:login' %}">Zaloguj się</a>
+          </li>
+          <li class="nav-item">
+            <a class ="nav-link" href="{% url 'users:register' %}">Zarejestruj się</a>
+          </li>
+          {% endif %}    
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-3 position-relative">
+      <main>
+      {% block content %}{% endblock content %}
+      </main>
+    </div>
+      <footer class="footer bg-dark">  
+        <div class="row justify-content-evenly mx-0 my-1 text-light">
+          <div class="col-md-3 justify-content-start ">
+              Nav
+          </div>
+          <div class="col-md-9 order-md-first d-flex justify-content-center user-select-none">                                                    
+            <div class="tile author " data-bs-toggle="tooltip" title="Strona www">                                
+              <a class="link" href="#"><i class=" icon-id-card-o"></i></a>
+            </div>                            
+            <div class="tile email" data-bs-toggle="tooltip" title="Email">
+              <a href="#"><i class="icon-mail"></i></a>
             </div>
-        </main>
-    </body> 
+            <div class="tile fb" data-bs-toggle="tooltip" title="Facebook">
+              <a href="#"><i class="icon-facebook-squared"></i></a>
+            </div>
+            <div class="tile in" data-bs-toggle="tooltip" title="LinkedIn">
+              <a href="#"><i class="icon-linkedin"></i></a>
+            </div>
+            <div class="tile github" data-bs-toggle="tooltip" title="GitHub">
+              <a href="#"><i class="icon-github-circled fs-1"></i></a>
+            </div>
+              
+          </div>                
+          <div class="col-12 text-center mt-2 mb-1 text-light">
+          <p> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a href="https://pl.wikipedia.org/">Wikipedia</a>
+          i innych źródeł licencji Creative Commons. </p>
+          </div>
+        </div>
+        
+        </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body> 
 </html>

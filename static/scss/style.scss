@@ -1,0 +1,337 @@
+$pagination-bg: white;
+$primary:  #52ba96;
+
+@import "bootstrap/bootstrap";
+
+
+body {
+  background-color: white !important;
+  background-position: 0 45px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+body p {
+  font-size: 17px;
+}
+
+.nav .link-color {
+  color: blue !important;
+}
+
+.navbar_color {
+  background-color: transparent;
+}
+
+.logo {
+  max-height: 50px;
+  width: auto;
+}
+
+.navbar_font {
+  font-size: 20px;
+  color: grey;
+}
+
+.footer {
+  border-top: 1px dotted #615d5d;
+  margin-top: auto;
+}
+
+.footer .tile {
+  margin: 10px;
+  font-size: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 60%;
+}
+
+.footer .tile a, .footer .tile a:hover, .footer .tile a:focus, .footer .tile a:active {
+  text-decoration: none;
+  color: white;
+}
+
+.author {
+  background-color: #82b637;
+}
+
+.author:hover {
+  background-color: #71a526;
+  color: lightgrey;
+}
+
+.email {
+  background-color: #DB4437;
+}
+
+.email:hover {
+  background-color: #CA3326;
+  color: lightgrey;
+}
+
+.fb {
+  background-color: #4267B2;
+}
+
+.fb:hover {
+  background-color: #3156A1;
+  color: lightgrey;
+}
+
+.in {
+  background-color: #0e76a8;
+}
+
+.in:hover {
+  background-color: #0d6597;
+  color: lightgrey;
+}
+
+.github {
+  background-color: #fff;
+}
+
+.github:hover {
+  background-color: #eee;
+  color: lightgrey;
+}
+
+.article p {
+  text-align: justify;
+  text-indent: 30px;
+}
+
+.topic_header {
+  height: 400px;
+  color: white;
+  position: relative;
+}
+
+.topic_header .image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.my_user_image {
+  width: 90px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.user_comment_field {
+  border-radius: 10px;
+  border: 1px solid grey;
+  font-size: 15px;
+}
+
+/* About */
+#parent {
+  background-color: black;
+  position: static;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#first {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  z-index: 1;
+}
+
+#second {
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: blueviolet;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#third {
+  position: static;
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  z-index: 3;
+}
+
+/* Galerry */
+
+.divImg{
+  /* background-color: #333; */
+  display:flex;
+  height: 250px;
+}
+
+
+.myImg {
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  max-width: 100%;
+  max-height: 100%;
+  
+  
+  
+}
+
+.myImg:hover {
+  -webkit-filter: brightness(80%);
+          filter: brightness(80%);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 5%;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+  
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  max-height: auto;
+  max-width: 70%;
+}
+
+/* Caption of Modal Image */
+.caption {
+  margin: auto;
+  display: block;
+  max-width: 70%;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, .caption {
+  -webkit-animation-name: zoom;
+          animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+          animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0.1);
+            transform: scale(0.1);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    -webkit-transform: scale(0.1);
+            transform: scale(0.1);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.user_card {
+  width: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px;
+  border: 2px solid #52ba96;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=style.css.map */
+
+
+

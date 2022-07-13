@@ -13,12 +13,20 @@ class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
         fields = ['title', 'description', 'text', 'header_image']
-        labels = {'text': ''}
+        widgets =  {
+            'text' : forms.Textarea(attrs={
+                'placeholder': 'Aby dodać nagłówek, umieść go między tagami "<h4></h4>". \nTreść umieść pomiędzy tagami "<p></p>"'
+                    '\n\nPrzykład:\n\n<h4>Twój nagłówek</h4>\n\n<p>Twoja treść</p>'}),
+                'rows': 20,
+            'description': forms.Textarea(attrs={'rows':3}),
+            
+            }
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['name', 'description', 'image']
-        labels = {'text': '', 'image':''}
+        
+        
         
 

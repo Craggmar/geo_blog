@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-<div class="row">
+<div class="row bg-light">
   <!-- HEADER -->
-  <div class="col-12 position-relative mt-1 mb-5 header">
-      <img class="img-fluid header_image" src="{{topic.header_image.url}}">
+  <div class="col-12 position-relative mt-1 mb-5 topic_header">
+      <img class="img-fluid image" src="{{topic.header_image.url}}">
       <span class="position-absolute bottom-0 start-0">
-       <p>
+       <p class="ms-3">
          {% if topic.date_created <= topic.date_modified %}
          Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
          {% else %}
@@ -18,7 +18,6 @@
       </span>
       {% if user == topic.owner %}
         <span class="position-absolute top-0 end-0 m-2">
-          <a href="{% url 'blogapp:add_image' topic.id %}"> Zmień zdjęcie</a>
           <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
           <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
         </span>
@@ -27,7 +26,7 @@
   <!-- MAIN ARTICLE -->
   <div class="col-lg-9 px-4 mb-5">
     <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
-    <div class="pb-5 mt-5">
+    <div class="py-3 article border-3 border-top border-bottom">
       {{topic.text|safe}}
     </div>
     <!-- COMMENTS SECTION -->
@@ -37,7 +36,7 @@
         {% for comment in comments %}
         <li>
           <div class="clearfix mb-4">
-            <div class="float-start">
+            <div class="float-start ">
               <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/_defaults/default_user.png' %}" alt="User_image">
             </div>
             <div class="overflow-hidden ps-2">
@@ -57,9 +56,12 @@
       {% if user.is_authenticated %}
       <form action="{% url 'blogapp:topic' topic.id %}" method = 'post'>
         <div class="m-0">
-          {% csrf_token %}{{form}}
-          <br>
-          <button type ='submit' class="btn btn-primary">Dodaj komentarz</button>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="text" class="form-label">Example textarea</label>
+            <textarea class="form-control" name="'text" rows="8"></textarea>
+          </div>
+          <button type ='submit' class="btn btn-secondary">Dodaj komentarz</button>
         </div>
       </form>
       {% else %}
@@ -67,32 +69,32 @@
       {% endif %}
     </div>
   </div>
-  <!-- SIDE IMAGES BAR -->
+  <!-- IMAGES BAR -->
   <div class="col-lg-3">
     {% if images %}   
       {% for image in images %}
-        <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}">
+        <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}" alt="{{image.description}}">
         <p class ="m-0 p-0 text-center">{{image.name}}</p>
 
-        <div id="myModal{{image.id}}" class="modal">
-          <span id="close{{image.id}}" class="close">&times;</span>
-          <img class="modal-content" id="img{{image.id}}">
-          <div id="caption{{image.id}}" class="caption"></div>
-        </div>
-     
-        <script>
-        // Get the modal
-        var modal = document.getElementById('myModal{{image.id}}');
-        
-        // Get the image and insert it inside the modal - use its "alt" text as a caption
-        var img = document.getElementById('myImg{{image.id}}');
-        var modalImg = document.getElementById("img{{image.id}}");
-        var captionText = document.getElementById("caption{{image.id}}");
-        img.onclick = function(){
-          modal.style.display = "block";
-          modalImg.src = this.src;
-          captionText.innerHTML = this.alt;
-        }
+        <div id="myModal{{image.id}}" class="modal user-select-none">
+      <span id="close{{image.id}}" class="close">&times;</span>
+      <img class="modal-content" id="img{{image.id}}">
+      <div id="caption{{image.id}}" class="caption"></div>
+    </div>
+ 
+    <script>
+    // Get the modal
+    var modal = document.getElementById('myModal{{image.id}}');
+    
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById('myImg{{image.id}}');
+    var modalImg = document.getElementById("img{{image.id}}");
+    var captionText = document.getElementById("caption{{image.id}}");
+    img.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+      captionText.innerHTML = this.alt;
+    }
         
         // Get the <span> element that closes the modal
         var span = document.getElementById("close{{image.id}}");
@@ -107,7 +109,7 @@
       <img class="img-thumbnail" src=" {% static default_topic_image.png %}">
     {% endif %}
     {% if user == topic.owner %}
-      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1">Dodaj zdjęcie</p></a>
+      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1 mt-4">Dodaj zdjęcie</p></a>
     {% endif %}
   </div>  
 

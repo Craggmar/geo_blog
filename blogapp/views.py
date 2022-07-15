@@ -16,19 +16,20 @@ def home(request):
 
 def index(request, page_nr):
     
-    all_topics = Topic.objects.order_by('-date_created')
-    numbers_of_topic_for_single_page = 3
+    topics = Topic.objects.order_by('-date_created')[1:]
+    last_topic = Topic.objects.order_by('-date_created')[0]
+    numbers_of_topic_for_single_page = 6
     tpp = numbers_of_topic_for_single_page
      
-    if len(all_topics) - (page_nr * tpp + tpp) >= 0:
-        visible_topics = all_topics[page_nr*tpp : page_nr*tpp+tpp]
-    elif len(all_topics) - (page_nr * tpp + tpp) < tpp > 0:
-        visible_topics = all_topics[page_nr*tpp : ]
+    if len(topics) - (page_nr * tpp + tpp) >= 0:
+        visible_topics = topics[page_nr*tpp : page_nr*tpp+tpp]
+    elif len(topics) - (page_nr * tpp + tpp) < tpp > 0:
+        visible_topics = topics[page_nr*tpp : ]
 
     class Page():
         def __init__(self) -> None:
             self.nr = page_nr
-            self.last_nr = int(len(all_topics) / (tpp))
+            self.last_nr = int(len(topics) / (tpp))
             self.next_nr = self.nr + 1
             if self.nr >0:
                 self.prev_nr = self.nr - 1
@@ -38,7 +39,7 @@ def index(request, page_nr):
     
     page = Page()
 
-    context = {'topics': visible_topics, 'page': page,}
+    context = {'topics': visible_topics, 'last_topic':last_topic, 'page': page,}
     return render(request, 'blogapp/index.html', context)
 
 

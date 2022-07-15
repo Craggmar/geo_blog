@@ -33,6 +33,9 @@ def logged_out(request):
     logout(request)
     return render(request, 'registration/logged_out.html', {})
 
+def user_account(request):
+    return render(request, 'user/user_account.html', {} )
+
 
 
 

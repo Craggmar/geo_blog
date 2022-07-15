@@ -2,38 +2,58 @@
 {% load static %}
 
 {% block content %}
-  <header class="text-center">
-    <h1>Blogapp index - Strona główna</h1>
-    <h2> Lista artykułów</h2>
-  </header>
+
+<div class="container mt-3">
+  <!-- BAR SECTION -->
   <p class="p-1 fs-5 text-end">
     {% if perms.blogapp.add_topic %}
         <a href="{% url 'blogapp:new_topic' %}">Add topic</a>
     {% endif %}
   </p>
-
-  <ul class="list-unstyled">
-    {% for topic in topics %}
-      <li class="mb-md-4">
-        <div class="row g-0 bg-dark text-light position-relative">
-          <div class="col-md-6 mb-md-0 p-md-4">
-              <img class="img-fluid" src="{{ topic.header_image.url }}">
-          </div>
-          <div class="col-md-6 p-4 ps-md-0" class="col-2 text-truncate">
-            <h2 class="mt-0 text-center text-capitalize" >{{topic.title}}</h2>
-            <h5 class="text-center">{{topic.description}}</h5>
-            <p>{{topic}}</p>
-            <a href="{% url 'blogapp:topic' topic.id %}" class="stretched-link link-light"><p class="text-end">Czytaj dalej</p></a>
+  <!-- HEADER ARTICLE -->
+  <header class="">    
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="row">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 fst-italic">{{last_topic.title}}</h1>
+          <p class="lead my-3">{{last_topic.description}}</p>
+          <p class="lead mb-0"><a class="text-decoration-none" href="{% url 'blogapp:topic' last_topic.id %}" class="text-white fw-bold">Czytaj dalej...</a></p>
+        </div>
+        <div class="col-md-6 p-0">
+          <img class="img-fluid" src="{{last_topic.header_image.url}}">
+        </div>
+      </div>    
+    </div>      
+  </header>
+</div>
+<!-- REST ARTICLEs -->
+<div class="container-fluid bg-light">
+  <div class="container my-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for topic in topics %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="img-fluid" src="{{ topic.header_image.url }}">
+            <div class="card-body">
+              <h3 class="text-center"><a class="text-decoration-none text-dark" href="{% url 'blogapp:topic' topic.id %}" class="link-dark">{{topic.title}}</a></h3>
+              <p class="card-text">{{topic.description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                  <a class="" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>
+                </div>
+                <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
+              </div>
+            </div>
           </div>
         </div>
-      </li>
-    {% empty %}
-      <li>
-        No topics found
-      </li>
-    {% endfor %}
-  </ul>
-  
+      {% empty %}
+        <li>
+          No topics found
+        </li>
+      {% endfor %}
+    </div>
+  </div>
+    <!--PAGGINATION  -->
   <nav aria-label="...">
     <ul class="pagination pagination-lg justify-content-center user-select-none">
       {% if page.nr > 0 %}
@@ -55,6 +75,6 @@
       </li>
     </ul>
   </nav>
-  
+</div>  
 {% endblock content %}
 

@@ -1,5 +1,6 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'blogapp/base_container.html' %}
 {% block content %}
+
 
 <div class="alert alert-danger text-center mt-1" role="alert">
     <p class="fw-bold">Czy na pewno chcesz usunąć "{{topic.title}}"?<p> 
@@ -10,4 +11,5 @@
     {% csrf_token %}{{form.as_p}}
     <button type="sumbit" class="btn btn-danger mt-3 position-absolute start-50 translate-middle" name='submit'>Usuń temat</button>
 </form>
+
 {% endblock content %}

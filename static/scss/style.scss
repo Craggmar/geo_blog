@@ -1,5 +1,6 @@
 $pagination-bg: white;
-// $primary:  #52ba96;
+$primary:  #6a70d8;
+$secondary: #bcffda;
 
 @import "bootstrap/bootstrap";
 
@@ -114,9 +115,14 @@ body p {
   color: lightgrey;
 }
 
+/* Topic */
+.article h4 {
+  text-decoration: underline;
+}
 .article p {
   text-align: justify;
   text-indent: 30px;
+  margin-top:1rem;
 }
 
 .topic_header {
@@ -142,18 +148,29 @@ body p {
   font-size: 15px;
 }
 
+
+
+/* Index */
+.divIndex {
+  height: 50vh;
+}
+.indexThumbnail {
+  height: 50%;
+}
+
+
 /* About */
 #parent {
   background-color: black;
   position: static;
   overflow: hidden;
-  z-index: 0;
+  z-index: 1;
 }
 
 #first {
   width: 100px;
   height: 100px;
-  background-color: blue;
+  background-color: yellow;
   z-index: 1;
 }
 
@@ -164,11 +181,11 @@ body p {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   width: 200px;
   height: 200px;
   background-color: blueviolet;
@@ -185,16 +202,17 @@ body p {
 }
 
 /* Galerry */
-
-.divImg{
+.divImg {
   /* background-color: #333; */
-  display:flex;
-  height: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 25vh;
 }
 
-
 .myImg {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   display: block;
   margin: auto;
   border-radius: 5px;
@@ -203,14 +221,11 @@ body p {
   transition: 0.3s;
   max-width: 100%;
   max-height: 100%;
-  
-  
-  
 }
 
 .myImg:hover {
   -webkit-filter: brightness(80%);
-          filter: brightness(80%);
+  filter: brightness(80%);
 }
 
 /* The Modal (background) */
@@ -235,14 +250,12 @@ body p {
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9);
   /* Black w/ opacity */
-  
 }
 
 /* Modal Content (image) */
 .modal-content {
   margin: auto;
   display: block;
-  max-height: auto;
   max-width: 70%;
 }
 
@@ -260,30 +273,30 @@ body p {
 /* Add Animation */
 .modal-content, .caption {
   -webkit-animation-name: zoom;
-          animation-name: zoom;
+  animation-name: zoom;
   -webkit-animation-duration: 0.6s;
-          animation-duration: 0.6s;
+  animation-duration: 0.6s;
 }
 
 @-webkit-keyframes zoom {
   from {
     -webkit-transform: scale(0.1);
-            transform: scale(0.1);
+    transform: scale(0.1);
   }
   to {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
 @keyframes zoom {
   from {
     -webkit-transform: scale(0.1);
-            transform: scale(0.1);
+    transform: scale(0.1);
   }
   to {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -321,17 +334,13 @@ body p {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 10px;
   border: 2px solid #52ba96;
   border-radius: 5px;
 }
-/*# sourceMappingURL=style.css.map */
-
-
-

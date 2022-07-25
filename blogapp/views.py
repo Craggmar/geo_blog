@@ -13,9 +13,7 @@ from .forms import CommentForm, TopicForm, ImageForm
 def home(request):
     return redirect ('/0/')
 
-
-def index(request, page_nr):
-    
+def index(request, page_nr):    
     topics = Topic.objects.order_by('-date_created')[1:]
     last_topic = Topic.objects.order_by('-date_created')[0]
     numbers_of_topic_for_single_page = 6

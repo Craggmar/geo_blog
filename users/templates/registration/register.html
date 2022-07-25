@@ -1,4 +1,4 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'blogapp/base_container.html' %}
 {% block content %}
 
   <div class="d-flex justify-content-center user-select-none">
@@ -9,7 +9,7 @@
       <div class="d-flex justify-content-center text-center text-primary">
         <form method="POST" action="">
           {% csrf_token %}      
-          <div id="InputChange">             
+          <div id="form_text_inputs">             
             <div class="input-group mb-3">
               <div>
                 <span class="input-group-text bg-primary"><i class="icon-user-1 text-light"></i></span>
@@ -37,7 +37,7 @@
           </div> 
           <div class="text-start p-2">
             <p class="text-light text-center text-uppercase py-2 border-bottom border-top border-primary fw-bold">Uprawnienia:</p>     
-            <div class="form-check" id="RadioChange">
+            <div class="form-check" id="form_radio_inputs">
               {{form.permissions}}
             </div>
           </div>          
@@ -59,14 +59,12 @@
 
 
   <script>
-      var div1 = document.getElementById('InputChange')
-      var input_fields = div1.getElementsByTagName('input')
+      var input_fields = form_text_inputs.getElementsByTagName('input')
       for (var field in input_fields){	
           input_fields[field].className += ' form-control'
       }
 
-      var div2 = document.getElementById('RadioChange')
-      var radio_fields = div2.getElementsByTagName('input')
+      var radio_fields = form_radio_inputs.getElementsByTagName('input')
       for (var field in radio_fields){	
           radio_fields[field].className += ' form-check-input'
           // radio_fields[field].setAttribute('name', 'flexRadioDefault');

@@ -10,7 +10,7 @@
     <title>Geoblog</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark text-light user-select-none">
+    <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark bg-gradient text-light user-select-none">
       <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:home' %}"><img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"></a> 
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
@@ -56,14 +56,14 @@
       </div>
     </nav>
       
-      {% block content %}{% endblock content %}
+      {% block base %}{% endblock base %}
       
-      <footer class="footer bg-dark">  
+      <footer class="footer bg-dark bg-gradient">  
         <div class="row justify-content-evenly mx-0 my-1 text-light">
           <div class="col-md-3 justify-content-start ">
               Nav
           </div>
-          <div class="col-md-9 order-md-first d-flex justify-content-center user-select-none">                                                    
+          <!-- <div class="col-md-9 order-md-first d-flex justify-content-center user-select-none">                                                    
             <div class="tile author " data-bs-toggle="tooltip" title="Strona www">                                
               <a class="link" href="#"><i class=" icon-id-card-o"></i></a>
             </div>                            
@@ -80,7 +80,7 @@
               <a href="#"><i class="icon-github-circled fs-1"></i></a>
             </div>
               
-          </div>                
+          </div>                 -->
           <div class="col-12 text-center mt-2 mb-1 text-light">
           <p> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a href="https://pl.wikipedia.org/">Wikipedia</a>
           i innych źródeł licencji Creative Commons. </p>

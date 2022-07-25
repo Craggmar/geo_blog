@@ -1,29 +1,35 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'blogapp/base_container.html' %}
 {% block content %}
-<h2>Edit topic {{topic.title}}</h2>
 
-<form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post' enctype="multipart/form-data" class='py-5'>
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="title" class="form-label fw-bold">Tytuł tematu:</label>
-      {{form.title}}
-      <div class="form-text">Maksymalnie 30 znaków.</div>
-    </div>
-    <div class="mb-3">
-      <label for="description" class="form-label fw-bold">Opis tematu:</label>
-      {{form.description}}
-      <div class="form-text">Dłuższy opis tematu do 200 znaków.</div>
-    </div>
-    <div class="mb-5">
-      <label for="text" class="form-label fw-bold">Treść tematu:</label>
-      {{form.text}}
-    </div>
-    <div class="mb-5">
-        <label for="header_image" class="form-label fw-bold">Zdjęcie tematu:</label>
-        {{form.header_image}}
+<div class="row justify-content-center">
+  <div class="col-10 col-lg-8 ">
+
+    <h2>Edit topic {{topic.title}}</h2>
+    <form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post' enctype="multipart/form-data" class='py-5'>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="title" class="form-label fw-bold">Tytuł tematu:</label>
+        {{form.title}}
+        <div class="form-text">Maksymalnie 30 znaków.</div>
       </div>
-    <button type="submit" class="btn btn-primary">Zapisz</button>
-  </form>
+      <div class="mb-3">
+        <label for="description" class="form-label fw-bold">Opis tematu:</label>
+        {{form.description}}
+        <div class="form-text">Dłuższy opis tematu do 200 znaków.</div>
+      </div>
+      <div class="mb-5">
+        <label for="text" class="form-label fw-bold">Treść tematu:</label>
+        {{form.text}}
+      </div>
+      <div class="mb-5">
+          <label for="header_image" class="form-label fw-bold">Zdjęcie tematu:</label>
+          {{form.header_image}}
+        </div>
+      <button type="submit" class="btn btn-primary">Zapisz</button>
+    </form>
+
+  </div>
+</div>
 
 
 <script>

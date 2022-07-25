@@ -1,5 +1,9 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'blogapp/base_container.html' %}
 {% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-10 col-lg-8 ">
+
 <h2>New topic</h2>
 
 <!-- <form action="{% url 'blogapp:new_topic' %}" method = 'post'>
@@ -18,7 +22,7 @@
     <div class="mb-3">
       <label for="description" class="form-label fw-bold">Opis tematu:</label>
       {{form.description}}
-      <div class="form-text">Dłuższy opis tematu do 200 znaków.</div>
+      <div class="form-text">Dłuższy opis tematu do 400 znaków.</div>
     </div>
     <div class="mb-5">
       <label for="text" class="form-label fw-bold">Treść tematu:</label>
@@ -30,6 +34,11 @@
       </div>
     <button type="submit" class="btn btn-primary">Zapisz</button>
   </form>
+
+  </div>
+</div>
+
+
 
 
 <script>

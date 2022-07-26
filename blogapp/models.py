@@ -14,6 +14,7 @@ class Topic(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     header_image = models.ImageField(null=True, default='_defaults/default_topic_image.png')
+    confirmed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title.capitalize()

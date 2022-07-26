@@ -22,39 +22,52 @@
         <ul class="navbar-nav me-auto">
           <li><hr class="dropdown-divider"></li>
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'blogapp:home' %}">Strona główna</a>
+            <a class ="nav-link link-light" href="{% url 'blogapp:home' %}">Strona główna</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'blogapp:about' %}">O stronie</a>
+            <a class ="nav-link link-light" href="{% url 'blogapp:about' %}">O stronie</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
+            <a class ="nav-link link-light" href="{% url 'blogapp:gallery' %}">Galeria</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'api:api' %}">Api</a>
+            <a class ="nav-link link-light" href="{% url 'api:api' %}">Api</a>
           </li>
           <li><hr class="dropdown-divider"></li>
         </ul>
 
+        
+
         <ul class="navbar-nav me-3">
           {% if user.is_authenticated %}
           <li class="nav-item mt-2 me-2">
-            Witaj,<a class="text-decoration-none" href="{% url 'users:user_account' %}">{{user.username}}</a>.
+            Witaj,<a class="text-decoration-none link-light" href="{% url 'users:user_account' %}"> {{user.username}}</a>.
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:logged_out' %}">Wyloguj się</a>
+            <a class="nav-link link-light" href="{% url 'users:logged_out' %}">Wyloguj się</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'users:login' %}">Zaloguj się</a>
+            <a class ="nav-link link-light" href="{% url 'users:login' %}">Zaloguj się</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link" href="{% url 'users:register' %}">Zarejestruj się</a>
+            <a class ="nav-link link-light" href="{% url 'users:register' %}">Zarejestruj się</a>
           </li>
-          {% endif %}    
+          {% endif %}
         </ul>
       </div>
     </nav>
+
+    <div class="container nav-scroller mb-2 link-dark">
+      <nav class="nav d-flex justify-content-evenly link-dark">
+        <a class="p-2 link-dark" href="{% url 'blogapp:my_topics' %}">Moje tematy</a>
+        {% if perms.blogapp.add_topic %}
+        <a class="p-2 link-dark" href="{% url 'blogapp:new_topic' %}">Dodaj temat</a>
+        {% endif %}        
+        <a class="p-2 link-dark" href="{% url 'blogapp:terms' %}">Regulamin</a>
+        <a class="p-2 link-dark" href="{% url 'users:user_account' %}">Konto Użytkownika</a>   
+      </nav>
+    </div>
       
       {% block base %}{% endblock base %}
       

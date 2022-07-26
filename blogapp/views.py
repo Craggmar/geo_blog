@@ -13,9 +13,11 @@ from .forms import CommentForm, TopicForm, ImageForm
 def home(request):
     return redirect ('/0/')
 
-def index(request, page_nr):    
-    topics = Topic.objects.order_by('-date_created')[1:]
-    last_topic = Topic.objects.order_by('-date_created')[0]
+def index(request, page_nr):
+    all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
+    topics = all_topics[1:]
+    last_topic = all_topics[0]
+
     numbers_of_topic_for_single_page = 6
     tpp = numbers_of_topic_for_single_page
      
@@ -43,6 +45,9 @@ def index(request, page_nr):
 
 def about(request):
     return render(request, 'blogapp/about.html')
+
+def terms(request):
+    return render(request, 'blogapp/terms.html')
 
 
 def gallery(request):
@@ -84,16 +89,28 @@ def topic(request, topic_id):
     if request.method != 'POST':
         form = CommentForm()
     else:
+        print('prev')
         form = CommentForm(data=request.POST)
+        print('postval')
         if form.is_valid():
             new_comment = form.save(commit=False)
+            print('false')
             new_comment.topic = topic
+            print('topic')
             new_comment.owner = request.user
+            print('user')
             new_comment.save()
+            print('full')
         return redirect('blogapp:topic', topic.id)
    
     context ={'topic': topic, 'comments': comments, 'form': form,'images':images,}
     return render(request, 'blogapp/topic.html', context)
+
+def my_topics(request):    
+    topics = Topic.objects.filter(owner=request.user).order_by('-date_created')
+    
+    context = {'topics': topics,}
+    return render(request, 'blogapp/my_topics.html', context)
 
 
 @login_required

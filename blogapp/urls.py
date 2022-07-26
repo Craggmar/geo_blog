@@ -16,11 +16,15 @@ urlpatterns = [
     path('topics/(<int:topic_id>)/', views.topic, name='topic'),
     #New topic
     path('new_topic/', views.new_topic, name='new_topic'),
+    #List
+    path('my_topics/', views.my_topics, name='my_topics'),
     #Edit topic
     path('edit_topic/(<int:topic_id>)/', views.edit_topic, name='edit_topic'),
     #Delete
     path('delete_topic/(<int:topic_id>)/', views.delete_topic, name='delete_topic'),
     #add image
     path('add_image/(<int:topic_id>)/', views.add_image, name='add_image'),
+     #About
+    path('regulation/', views.terms, name='terms'),
     
 ]

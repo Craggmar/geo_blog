@@ -21,7 +21,7 @@ class Topic(models.Model):
 
 class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    text = models.CharField(max_length=600,default='')
+    text = models.CharField(max_length=600)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.PROTECT)

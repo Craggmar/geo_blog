@@ -112,6 +112,19 @@ def my_topics(request):
     context = {'topics': topics,}
     return render(request, 'blogapp/my_topics.html', context)
 
+@permission_required('is_staff', raise_exception=True)
+def pending_topics(request):
+    topics = Topic.objects.filter(confirmed=False).order_by('-date_created')
+    
+    context = {'topics': topics,}
+    return render(request, 'blogapp/pending_topics.html', context)
+
+def confirm_topic(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    if request.method =='POST':        
+        topic.confirmed = True
+        topic.save()
+    return redirect('blogapp:pending_topics')
 
 @login_required
 @permission_required('blogapp.add_topic', raise_exception=True)

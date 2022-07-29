@@ -13,7 +13,7 @@ class BlogUser(models.Model):
     email = models.CharField(max_length=30, blank=True)
     first_name = models.CharField(max_length=30, blank=True,)
     last_name = models.CharField(max_length=30, blank=True,)
-    profile_picture = models.ImageField(blank=True, default='_defaults/default_user.png', upload_to = user_profile_images_path)
+    profile_picture = models.ImageField(blank=True, upload_to = user_profile_images_path)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

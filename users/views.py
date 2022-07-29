@@ -27,7 +27,7 @@ def register(request):
             permissions = request.POST.get('permissions')
             group = Group.objects.get(name = permissions)
             new_user.groups.add(group)
-            BlogUser.objects.create(user=new_user, name= new_user.username, email=new_user.email,)
+            BlogUser.objects.create(user=new_user, name= new_user.username, email=new_user.email)
 
             login(request, new_user)
             return redirect('blogapp:home')    

@@ -2,14 +2,41 @@
 {% block content %}
 
 
-<div class="alert alert-danger text-center mt-1" role="alert">
-    <p class="fw-bold">Czy na pewno chcesz usunąć "{{topic.title}}"?<p> 
-    <a class ="alert-link" href="{% url 'blogapp:home' %}">Powrót do strony głównej</a>
-  </div>
 
-<form action="{% url 'blogapp:delete_topic' topic.id %}" method = 'post'>
-    {% csrf_token %}{{form.as_p}}
-    <button type="sumbit" class="btn btn-danger mt-3 position-absolute start-50 translate-middle" name='submit'>Usuń temat</button>
-</form>
+
+  <header class="">    
+    <div class="text-dark rounded bg-light my-3">
+        <div class="row">
+        <div class="col-lg-6 p-4 order-last order-lg-first">
+          <h1 class="display-4 fst-italic">{{topic.title}}</h1>
+          <p class="lead my-3" style="text-align: justify;">{{topic.description}}</p>
+          <p class="lead mb-0"><a class="text-decoration-none fs-4" href="{% url 'blogapp:topic' topic.id %}" class="text-white fw-bold">Czytaj dalej...</a></p>
+
+        </div>
+        <div class="col-lg-6 mx-auto">
+          <img class="img-fluid p-2" src="{{topic.header_image.url}}">
+        </div>
+      </div>    
+    </div>    
+  </header>
+<div class="alert alert-danger text-center mt-3" role="alert">
+    <p class="fw-bold fs-5">Czy na pewno chcesz usunąć temat "{{topic.title}}"?<p>
+    <p class="">Powiązane dane zostaną utracone nieodwracalnie.</p>
+      <form class="d-inline ms-1" action="{% url 'blogapp:delete_topic' topic.id %}" method = 'post'>
+        {% csrf_token %}
+        <button type="sumbit" class="btn btn-danger mt-2" name='submit'>Usuń</button>
+      </form>
+      <form class="d-inline me-1" action="{% url 'blogapp:index' 0 %}" method = 'get'>
+        
+        <button type="sumbit" class="btn btn-dark mt-2" name='submit'>Wróć</button>
+      </form>
+      
+      
+    
+  
+</div>
+
+
+
 
 {% endblock content %}

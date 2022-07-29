@@ -37,12 +37,17 @@
         {% for comment in comments %}
         <li>
           <div class="clearfix mb-4">
-            <div class="float-start ">
-              <img class="img-fluid me-2 mt-1 my_user_image" src="{% static 'images/_defaults/default_user.png' %}" alt="User_image">
+            <div class="float-start">
+              {% if comment.owner.bloguser.profile_picture %}
+              <img class="img-fluid me-2 mt-1 my_user_image" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
+              {% else %}
+              <img class="img-fluid me-2 mt-1 my_user_image" src='_defaults/default_user.png' alt="default_user_image">
+              {% endif %}
             </div>
             <div class="overflow-hidden ps-2">
-              <div class="user_comment_field p-2">{{ comment.text }}</div>
-              <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b> przez: <b>{{comment.owner}}</b></span>
+              <b>{{comment.owner.bloguser.name|capfirst}}</b>
+              <div class="user_comment_field p-2 bg-white mb-1">{{ comment.text }}</div>
+              <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b>
             </div>
           </div>
         </li>
@@ -52,18 +57,14 @@
       </ul>
     </div>
     <!-- ADD COMMENT FORM -->
-    <div>
-      <br>
+    <div class="m-0">
       {% if user.is_authenticated %}
       <form action="{% url 'blogapp:topic' topic.id %}" method ='post'>
-        <div class="m-0">
           {% csrf_token %}
           <div class="mb-3">
-            <label for="text" class="form-label">Example textarea</label>
-            <textarea class="form-control" name="'text" rows="8"></textarea>
+            <textarea class="form-control" name="text" rows="8"></textarea>
           </div>
-          <button type ='submit' class="btn btn-secondary">Dodaj komentarz</button>
-        </div>
+          <button type ='submit' class="btn btn-secondary">Dodaj komentarz</button>       
       </form>
       {% else %}
       <b>Musisz być zalogowany aby móc dodawać komentarze. </b>

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'api',
     #Others
     'rest_framework',
-    'bootstrap5',
+    
     #default apps
     'django.contrib.admin',
     'django.contrib.auth',

@@ -27,7 +27,7 @@ def register(request):
             permissions = request.POST.get('permissions')
             group = Group.objects.get(name = permissions)
             new_user.groups.add(group)
-            BlogUser.objects.create(user=new_user, name= new_user.username, email=new_user.email)
+            BlogUser.objects.create(user=new_user, name=new_user.username, email=new_user.email, permission_group=permissions)
 
             login(request, new_user)
             return redirect('blogapp:home')    
@@ -41,14 +41,14 @@ def logged_out(request):
 
 def user_account(request):
     bloguser = request.user.bloguser
-    print(request.user.bloguser.profile_picture)
     if request.method != 'POST':        
         form = EditUserProfileForm(instance=bloguser)
     else:
         form = EditUserProfileForm(request.POST, request.FILES, instance=bloguser)      
         if form.is_valid:
             if request.FILES:
-                os.remove(os.path.join(settings.MEDIA_ROOT, str(bloguser.profile_picture)))
+                if "default_user.png" not in bloguser.profile_picture.url:
+                    os.remove(os.path.join(settings.MEDIA_ROOT, str(bloguser.profile_picture)))
             form.save()
     context = {'form': form}
     return render(request, 'user/user_account.html', context)

@@ -19,8 +19,10 @@ class CreateUserForm(UserCreationForm):
 class EditUserProfileForm(forms.ModelForm):
   name = forms.CharField(widget=forms.TextInput(attrs={"class":"Nazwa użytkownika"}))
   email = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Email"}))
-  first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder":"imie"}))
-  last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder":"nazwisko"}))
+  first_name = forms.CharField(required=False, widget=forms.TextInput())
+  last_name = forms.CharField(required=False, widget=forms.TextInput())
+  description = forms.CharField(required=False, widget=forms.Textarea(attrs={"rows":2}), max_length=200)
+
 
   class Meta:
     model = BlogUser

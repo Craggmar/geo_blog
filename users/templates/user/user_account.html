@@ -15,11 +15,12 @@
         <div class="">
           <div class="row g-1">
             <div class="col-md-3">
-              <div class="card">
-                <img src='{{request.user.bloguser.profile_picture.url}}' class="card-img-top" alt="...">
+              <div class="card border border-2 border-dark">
+                <img class=" user-select-none" src='{{request.user.bloguser.profile_picture.url}}' class="card-img-top" alt="...">
                 <div class="card-body">
                   <h3 class="card-title text-center border-bottom pb-3">{{request.user.bloguser.name}}</h3>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="fw-light text-center">{{request.user.bloguser.permission_group}}</p>
+                  <p class="fs-6 fst-italic card-text">{{request.user.bloguser.description}}</p>
                 </div>
                 
                   <!-- <img src='{{request.user.bloguser.profile_picture.url}}' class="img-fluid rounded-circle py-5" alt="...">
@@ -31,22 +32,26 @@
                 <form action="{% url 'users:user_account'  %}" method = 'post' enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="mb-3">
-                    <label for="name" class="form-label fw-bold">Nazwa użytkownika</label>
+                    <label for="name" class="form-label fw-bold">Nazwa użytkownika:</label>
                     {{form.name}}
                     <div class="form-text">Nazwa wyświetlana na stronie.</div>
                   </div>
                   <div class="mb-3">
-                    <label for="email" class="form-label fw-bold">Email</label>
+                    <label for="email" class="form-label fw-bold">Email:</label>
                     {{form.email}}
                     <div class="form-text">Adres e-mail</div>
                   </div>
                   <div class="mb-3">
-                    <label for="first_name" class="form-label fw-bold">Imię</label>
+                    <label for="first_name" class="form-label fw-bold">Imię:</label>
                     {{form.first_name}}
                   </div>
                   <div class="mb-3">
-                    <label for="last_name" class="form-label fw-bold">Nazwisko</label>
+                    <label for="last_name" class="form-label fw-bold">Nazwisko:</label>
                     {{form.last_name}}
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label fw-bold">Opis:</label>
+                    {{form.description}}
                   </div>
                   
                   <div class="mb-3">
@@ -72,6 +77,10 @@
 
 <script>
   var form_fields = document.getElementsByTagName('input')
+  for (var field in form_fields){	
+    form_fields[field].className += ' form-control'
+  }
+  var form_fields = document.getElementsByTagName('textarea')
   for (var field in form_fields){	
     form_fields[field].className += ' form-control'
   }

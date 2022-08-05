@@ -11,6 +11,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark bg-gradient text-light user-select-none">
+      
       <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:home' %}"><img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"></a> 
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
@@ -22,22 +23,28 @@
         <ul class="navbar-nav me-auto">
           <li><hr class="dropdown-divider"></li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'blogapp:home' %}">Strona główna</a>
+            <a class ="nav-link link-light" href="{% url 'blogapp:gallery' %}">Galeria</a>
           </li>
           <li class="nav-item">
             <a class ="nav-link link-light" href="{% url 'blogapp:about' %}">O stronie</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'blogapp:gallery' %}">Galeria</a>
-          </li>
-          <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'api:api' %}">Api</a>
+            <a class ="nav-link link-light" href="{% url 'api:api' %}">API</a>
           </li>
           <li class="nav-item">
             <a class ="nav-link link-light" href="{% url 'blogapp:terms' %}">Regulamin</a>
           </li>
+          <li class="nav-item">
+            <a class ="nav-link link-light" href="{% url 'blogapp:contact' %}">Kontakt</a>
+          </li>
           <li><hr class="dropdown-divider"></li>
         </ul>
+
+        <form class="d-flex me-3" action="{% url 'blogapp:search_topic' %}" method = 'post'>
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" name="searched" placeholder="szukaj" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Szukaj</button>
+        </form>
 
         
 

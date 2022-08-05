@@ -16,7 +16,10 @@ def home(request):
 def index(request, page_nr):
     all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
     topics = all_topics[1:]
-    last_topic = all_topics[0]
+    try:
+        last_topic = all_topics[0]
+    except IndexError:
+        last_topic = None
 
     numbers_of_topic_for_single_page = 6
     tpp = numbers_of_topic_for_single_page
@@ -51,33 +54,25 @@ def terms(request):
 
 
 def gallery(request):
-
-    # folders_dirs= []
-    # all_images_dirs = []
-        
-    # for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-    #     for dir in dirs:
-    #         folders_dirs.append(os.path.join(root, dir))
-    
-    # for folder in folders_dirs:
-    #     for root, dirs, files in os.walk(folder):
-    #         for file in files:
-    #             all_images_dirs.append(os.path.join(root, file))
-
-    all_images = Image.objects.all()
-
-
-    '''Tymczasowy test'''
-    # all_images = []
-
-    # topics = Topic.objects.all()
-    # for topic in topics:
-    #     all_images.append(topic.header_image)
-    
+    all_images = Image.objects.all()    
                 
     context={"images":all_images}
     return render(request, 'blogapp/gallery.html',context)
 
+@login_required
+def contact(request):
+    return render(request, 'blogapp/contact.html')
+
+def search_topic(request):
+    all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
+    topics = []
+    if request.method == 'POST':  
+        searched = request.POST['searched']
+        for topic in all_topics:
+            if searched.lower() in topic.title.lower():
+                topics.append(topic)
+    context ={'topics': topics, 'searched':searched}
+    return render(request, 'blogapp/search_topic.html', context)
 
 def topic(request, topic_id):
     # topic = Topic.objects.get(id = topic_id)

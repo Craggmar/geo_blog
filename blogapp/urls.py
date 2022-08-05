@@ -12,8 +12,10 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     #Gallery
     path('gallery/', views.gallery, name='gallery'),
+     #Gallery
+    path('contact/', views.contact, name='contact'),
     #Single Topic
-    path('topics/(<int:topic_id>)/', views.topic, name='topic'),
+    path('topic/(<int:topic_id>)/', views.topic, name='topic'),
     #New topic
     path('new_topic/', views.new_topic, name='new_topic'),
     #pending
@@ -28,5 +30,7 @@ urlpatterns = [
     #add image
     path('add_image/(<int:topic_id>)/', views.add_image, name='add_image'),
      #About
-    path('regulation/', views.terms, name='terms'),    
+    path('terms/', views.terms, name='terms'),
+    #search
+    path('search_topic/', views.search_topic, name='search_topic') 
 ]

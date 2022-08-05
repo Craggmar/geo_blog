@@ -5,25 +5,32 @@
 
 <div class="row bg-light">
   <!-- HEADER -->
-  <div class="col-12 position-relative mt-1 mb-5 topic_header">
-      <img class="img-fluid image" src="{{topic.header_image.url}}">
-      <span class="position-absolute bottom-0 start-0">
-       <p class="ms-3">
-         {% if topic.date_created <= topic.date_modified %}
-         Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
-         {% else %}
-         Ostatnio zmodyfikowano: <b>{{topic.date_modified|date:"d-m-y"}}</b>; <b>{{topic.date_modified|time:"H:i"}}</b>
-         {% endif %}
-         przez: <b>{{topic.owner}}</b>
-       </p>
-      </span>
-      {% if user == topic.owner %}
-        <span class="position-absolute top-0 end-0 m-2">
-          <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
-          <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
-        </span>
-      {% endif %}
-  </div>
+  
+    <div class="row">
+      <div class="col-9">
+        <img class="img-fluid" src="{{topic.header_image.url}}">
+        <p class="fw-light text-center">Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+      </div>
+      <div class="col-3">
+        <span class="">
+          <p class="ms-3">
+            {% if topic.date_created <= topic.date_modified %}
+            Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
+            {% else %}
+            Ostatnio zmodyfikowano: <b>{{topic.date_modified|date:"d-m-y"}}</b>; <b>{{topic.date_modified|time:"H:i"}}</b>
+            {% endif %}
+            przez: <b>{{topic.owner}}</b>
+          </p>
+          </span>
+        {% if user == topic.owner %}
+          <span class="">
+            <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
+            <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
+          </span>
+        {% endif %}
+      </div>
+    </div>
+  
   <!-- MAIN ARTICLE -->
   <div class="col-lg-9 px-4 mb-5">
     <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
@@ -38,11 +45,7 @@
         <li>
           <div class="clearfix mb-4">
             <div class="float-start">
-              {% if comment.owner.bloguser.profile_picture %}
               <img class="img-fluid me-2 mt-1 my_user_image" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
-              {% else %}
-              <img class="img-fluid me-2 mt-1 my_user_image" src='_defaults/default_user.png' alt="default_user_image">
-              {% endif %}
             </div>
             <div class="overflow-hidden ps-2">
               <b>{{comment.owner.bloguser.name|capfirst}}</b>
@@ -83,6 +86,7 @@
       <img class="modal-content" id="img{{image.id}}">
       <div id="caption{{image.id}}" class="caption"></div>
     </div>
+    
  
     <script>
     // Get the modal

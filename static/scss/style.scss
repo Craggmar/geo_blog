@@ -1,5 +1,4 @@
 $pagination-bg: white;
-$primary:  #6a70d8;
 $secondary: #bcffda;
 
 @import "bootstrap/bootstrap";
@@ -125,16 +124,9 @@ body p {
   margin-top:1rem;
 }
 
-.topic_header {
-  height: 400px;
-  color: white;
-  position: relative;
-}
 
-.topic_header .image {
-  max-width: 100%;
-  max-height: 100%;
-}
+
+
 
 .my_user_image {
   width: 90px;

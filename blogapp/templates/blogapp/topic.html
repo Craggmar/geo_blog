@@ -2,38 +2,54 @@
 {% load static %}
 
 {% block content %}
+<header class="p-3 border-bottom mb-5">
+  <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
+    <i class="fa-solid fa-book-open fa-2xl"></i>
+    <span class="fs-4 ms-3">{{topic.title}}</span>
+  </span>
+</header>
 
 <div class="row bg-light">
-  <!-- HEADER -->
-  
-    <div class="row">
-      <div class="col-9">
-        <img class="img-fluid" src="{{topic.header_image.url}}">
-        <p class="fw-light text-center">Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+  <!-- HEADER -->  
+    
+      <div class="col-lg-9 order-2 order-lg-1">
+        <img class="img-fluid user-select-none" src="{{topic.header_image.url}}">
+        <p class="mx-3 fs-6 fst-italic text-muted">{{topic.header_image_description}}</p>
       </div>
-      <div class="col-3">
-        <span class="">
-          <p class="ms-3">
-            {% if topic.date_created <= topic.date_modified %}
-            Utworzono: <b>{{topic.date_created|date:"d-m-y"}}</b>; <b>{{topic.date_created|time:"H:i"}}</b>
-            {% else %}
-            Ostatnio zmodyfikowano: <b>{{topic.date_modified|date:"d-m-y"}}</b>; <b>{{topic.date_modified|time:"H:i"}}</b>
-            {% endif %}
-            przez: <b>{{topic.owner}}</b>
-          </p>
-          </span>
+      <!-- AUTHOR SECTION -->
+      <div class="col-lg-3 order-1 order-lg-2 border-top border-bottom">
+        <div class="mx-auto p-2">
+          <p class="fst-italic text-center fs-5">Utworzono {{topic.date_created|date:"j. E Y"}}</p>
+          <p class="fst-italic text-center">przez:</p>
+          <img class="d-block img-thumbnail rounded-circle mx-auto" style="width:70%" src='{{topic.owner.bloguser.profile_picture.url}}' alt="User_image">
+          <p class="fst-italic text-center fs-4"><a class="text-decoration-none text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></p>
+        
         {% if user == topic.owner %}
-          <span class="">
-            <a href="{% url 'blogapp:edit_topic' topic.id %}">Edytuj temat</a>
-            <a href="{% url 'blogapp:delete_topic' topic.id %}">Usuń temat</a>
-          </span>
+            <ul class="list-inline mt-5 text-center">
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edytuj">
+                <a href="{% url 'blogapp:edit_topic' topic.id %}">
+                  <i class="fa-solid fa-pen-to-square fa-2x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuń">
+                <a href="{% url 'blogapp:delete_topic' topic.id %}">
+                  <i class="fa-solid fa-file-circle-xmark fa-2x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Zdjęcia">
+                <a href="/">
+                  <i class="fa-solid fa-image fa-2x"></i>
+                </a>
+              </li>
+            </ul>         
         {% endif %}
+        </div>   
       </div>
-    </div>
+    
   
   <!-- MAIN ARTICLE -->
-  <div class="col-lg-9 px-4 mb-5">
-    <div class="description_field pb-5"><h2 class="h3">{{topic.description}}</h2></div>
+  <div class="col-lg-9 order-3 px-4 mb-5">
+    <div class="description_field pb-5"><h2 class="h4">{{topic.description}}</h2></div>
     <div class="py-3 article border-3 border-top border-bottom">
       {{topic.text|safe}}
     </div>
@@ -45,17 +61,17 @@
         <li>
           <div class="clearfix mb-4">
             <div class="float-start">
-              <img class="img-fluid me-2 mt-1 my_user_image" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
+              <img class="img-fluid  my_user_image rounded-circle" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
             </div>
             <div class="overflow-hidden ps-2">
-              <b>{{comment.owner.bloguser.name|capfirst}}</b>
+              <a class="text-decoration-none text-dark fw-bold ps-2" href="{% url 'users:view_account' comment.owner.username %}">{{comment.owner.bloguser.name|capfirst}}</a>
               <div class="user_comment_field p-2 bg-white mb-1">{{ comment.text }}</div>
-              <span>Wysłano: <b>{{comment.date_created|date:"d-m-y;"}}</b> <b>{{comment.date_created|time:"H:i"}}</b>
+              <span class="fs-6">Wysłano: {{comment.date_created|date:"d-m-y;"}}{{comment.date_created|time:"H:i"}}
             </div>
           </div>
         </li>
         {% empty %}
-          <li>No comments found</li>
+          <p class="p-3 fw-bold">Nikt nie dodał jeszcze komentarza</p>
         {% endfor %}
       </ul>
     </div>
@@ -70,12 +86,12 @@
           <button type ='submit' class="btn btn-secondary">Dodaj komentarz</button>       
       </form>
       {% else %}
-      <b>Musisz być zalogowany aby móc dodawać komentarze. </b>
+      <p class="p-3 fw-bold">Musisz być zalogowany aby móc dodawać komentarze.</p>
       {% endif %}
     </div>
   </div>
   <!-- IMAGES BAR -->
-  <div class="col-lg-3">
+  <div class="col-lg-3 order-4">
     {% if images %}   
       {% for image in images %}
         <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}" alt="{{image.description}}">
@@ -111,11 +127,9 @@
         }
         </script>
       {% endfor %}
-    {% else %}
-      <img class="img-thumbnail" src=" {% static default_topic_image.png %}">
     {% endif %}
     {% if user == topic.owner %}
-      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1 mt-4">Dodaj zdjęcie</p></a>
+      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1 mt-4">Dodaj obraz</i></p></a>
     {% endif %}
   </div>  
 

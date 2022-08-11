@@ -1,30 +1,42 @@
 {% extends 'blogapp/base_container.html' %}
 {% block content %}
 
+<header class="p-3 border-bottom mb-5">
+  <span href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+    <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+    <span class="fs-4 ms-3">Edytuj temat: {{topic.title}}</span>
+  </span>
+</header>
 <div class="row justify-content-center">
-  <div class="col-10 col-lg-8 ">
-
-    <h2>Edit topic {{topic.title}}</h2>
-    <form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post' enctype="multipart/form-data" class='py-5'>
+  <div class="col-10 col-lg-8 bg-light p-3">
+    {% if topic.header_image %}
+    <img class="img-fluid user-select-none mb-4" src="{{topic.header_image.url}}">
+    {% endif %}
+    <form action="{% url 'blogapp:edit_topic' topic.id %}" method = 'post' enctype="multipart/form-data">
       {% csrf_token %}
       <div class="mb-3">
         <label for="title" class="form-label fw-bold">Tytuł tematu:</label>
         {{form.title}}
-        <div class="form-text">Maksymalnie 30 znaków.</div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label fw-bold">Opis tematu:</label>
         {{form.description}}
-        <div class="form-text">Dłuższy opis tematu do 200 znaków.</div>
+        <div class="form-text">Kilkuzdaniowy opis tematu.</div>
       </div>
       <div class="mb-5">
         <label for="text" class="form-label fw-bold">Treść tematu:</label>
         {{form.text}}
+        <div class="form-text">Przykład:<h4>Twój nagłówek</h4><p>Twoja treść</p></div>
       </div>
       <div class="mb-5">
-          <label for="header_image" class="form-label fw-bold">Zdjęcie tematu:</label>
-          {{form.header_image}}
-        </div>
+        <label for="header_image" class="form-label fw-bold">Zdjęcie tematu:</label>
+        {{form.header_image}}
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label fw-bold">Opis grafiki</label>
+        {{form.header_image_description}}
+        <div class="form-text">Krótki opis grafiki.</div>
+      </div>
       <button type="submit" class="btn btn-primary">Zapisz</button>
     </form>
 

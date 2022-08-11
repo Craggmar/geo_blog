@@ -32,7 +32,7 @@ def index(request, page_nr):
     class Page():
         def __init__(self) -> None:
             self.nr = page_nr
-            self.last_nr = int(len(topics) / (tpp))
+            self.last_nr = int(len(topics) / (tpp+1))
             self.next_nr = self.nr + 1
             if self.nr >0:
                 self.prev_nr = self.nr - 1
@@ -75,7 +75,6 @@ def search_topic(request):
     return render(request, 'blogapp/search_topic.html', context)
 
 def topic(request, topic_id):
-    # topic = Topic.objects.get(id = topic_id)
     topic =    get_object_or_404(Topic, id=topic_id)
     comments = topic.comment_set.order_by('-date_created')
     images = topic.image_set.all()
@@ -84,18 +83,12 @@ def topic(request, topic_id):
     if request.method != 'POST':
         form = CommentForm()
     else:
-        print('prev')
         form = CommentForm(data=request.POST)
-        print('postval')
         if form.is_valid():
             new_comment = form.save(commit=False)
-            print('false')
             new_comment.topic = topic
-            print('topic')
             new_comment.owner = request.user
-            print('user')
             new_comment.save()
-            print('full')
         return redirect('blogapp:topic', topic.id)
    
     context ={'topic': topic, 'comments': comments, 'form': form,'images':images,}
@@ -138,7 +131,6 @@ def new_topic(request):
             return redirect('blogapp:home')
 
     context = {'form': form}
-
     return render(request, 'blogapp/new_topic.html', context)
 
 

@@ -10,13 +10,21 @@ def topic_images_path(self, filename):
 
 class Topic(models.Model):
     title = models.CharField(max_length=30)
-    description = models.CharField(max_length=400)
+    description = models.CharField(max_length=600)
     text = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     header_image = models.ImageField(null=True, default='_defaults/default_topic_image.png', upload_to=topic_images_path)
+    header_image_description = models.CharField(max_length=200, blank=True)
     confirmed = models.BooleanField(default=False)
+
+    @property
+    def short_description(self):
+        if len(self.description)> (lenght:=270):
+            return self.description[:lenght]+'...'
+        else:
+            return self.description
 
 
     

@@ -12,7 +12,7 @@ class CommentForm(forms.ModelForm):
 class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic
-        fields = ['title', 'description', 'text', 'header_image']
+        fields = ['title', 'description', 'text', 'header_image', 'header_image_description']
         widgets =  {
             'text' : forms.Textarea(attrs={
                 'placeholder': 'Aby dodać nagłówek, umieść go między tagami "<h4></h4>". \nTreść umieść pomiędzy tagami "<p></p>"'

@@ -3,7 +3,6 @@ $secondary: #bcffda;
 
 @import "bootstrap/bootstrap";
 
-
 body {
   background-color: white !important;
   background-position: 0 45px;
@@ -18,6 +17,7 @@ body {
           flex-direction: column;
   height: 100vh;
   margin: 0;
+  overflow-y:scroll;
 }
 
 body p {
@@ -115,9 +115,7 @@ body p {
 }
 
 /* Topic */
-.article h4 {
-  text-decoration: underline;
-}
+
 .article p {
   text-align: justify;
   text-indent: 30px;

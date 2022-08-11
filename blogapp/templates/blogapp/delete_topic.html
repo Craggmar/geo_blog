@@ -1,14 +1,17 @@
 {% extends 'blogapp/base_container.html' %}
 {% block content %}
 
-
-
-
-  <header class="">    
+<header class="p-3 border-bottom mb-5">
+  <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
+    <i class="fa-solid fa-file-circle-xmark fa-2xl"></i>
+    <span class="fs-4 ms-3">Usuń temat: {{topic.title}}</span>
+  </span>
+</header>
+  <div class="">    
     <div class="text-dark rounded bg-light my-3">
         <div class="row">
         <div class="col-lg-6 p-4 order-last order-lg-first">
-          <h1 class="display-4 fst-italic">{{topic.title}}</h1>
+          <a class="text-decoration-none" href="{% url 'blogapp:topic' topic.id %}" class=""><h1 class="display-4 fst-italic text-dark">{{topic.title}}</h1></a></p>          
           <p class="lead my-3" style="text-align: justify;">{{topic.description}}</p>
           <p class="lead mb-0"><a class="text-decoration-none fs-4" href="{% url 'blogapp:topic' topic.id %}" class="text-white fw-bold">Czytaj dalej...</a></p>
 
@@ -18,7 +21,7 @@
         </div>
       </div>    
     </div>    
-  </header>
+  </div>
 <div class="alert alert-danger text-center mt-3" role="alert">
     <p class="fw-bold fs-5">Czy na pewno chcesz usunąć temat "{{topic.title}}"?<p>
     <p class="">Powiązane dane zostaną utracone nieodwracalnie.</p>

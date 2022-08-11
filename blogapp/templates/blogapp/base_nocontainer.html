@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/web.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    
     <title>Geoblog</title>
+    
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark bg-gradient text-light user-select-none">
@@ -87,9 +90,15 @@
       
       <footer class="footer bg-dark bg-gradient py-2">  
         <div class="row justify-content-evenly mx-0 text-light">
-          <!-- <div class="col-md-3 justify-content-start ">
-              Nav
-          </div> -->
+          <div class="col-md-3">
+              <ul class="list-inline">
+                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-github fa-3x"></a></i></li>
+                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-linkedin fa-3x"></a></i></li>
+                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-solid fa-envelope fa-3x"></a></i></li> 
+                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-facebook fa-3x"></a></i></li>
+              </ul>
+          </div>
+
           <!-- <div class="col-md-9 order-md-first d-flex justify-content-center user-select-none">                                                    
             <div class="tile author " data-bs-toggle="tooltip" title="Strona www">                                
               <a class="link" href="#"><i class=" icon-id-card-o"></i></a>
@@ -109,7 +118,8 @@
               
           </div>                 -->
           <div class="col-12 text-center text-light">
-          <p> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a href="https://pl.wikipedia.org/">Wikipedia</a>
+            <img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO">
+            <p class="text-muted"> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a href="https://pl.wikipedia.org/">Wikipedia</a>
           i innych źródeł licencji Creative Commons. </p>
           </div>
         </div>

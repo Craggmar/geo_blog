@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect 
 
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.contrib import messages
 from django.conf import settings
 
@@ -15,7 +15,7 @@ import os
 
 
 @unauthenticated_user
-def register(request):  
+def register(request):
 
     if request.method !="POST":
         form = CreateUserForm()
@@ -52,6 +52,12 @@ def user_account(request):
             form.save()
     context = {'form': form}
     return render(request, 'user/user_account.html', context)
+
+def view_account(request, username):
+    user = User.objects.get(username=username)
+
+    context = {'user':user}
+    return render(request, 'user/view_account.html', context)
 
 
 

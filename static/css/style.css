@@ -11498,6 +11498,20 @@ fieldset:disabled .btn {
   }
 }
 
+/* Style buttons */
+.icobtn {
+  background-color: DodgerBlue; /* Blue background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  cursor: pointer; /* Mouse pointer on hover */
+  border-radius: 50%;
+}
+
+/* Darker background on mouse-over */
+.icobtn:hover {
+  background-color: RoyalBlue;
+}
+
 body {
   background-color: white !important;
   background-position: 0 45px;
@@ -11512,6 +11526,7 @@ body {
   flex-direction: column;
   height: 100vh;
   margin: 0;
+  overflow-y: scroll;
 }
 
 body p {
@@ -11609,9 +11624,6 @@ body p {
 }
 
 /* Topic */
-.article h4, .article .h4 {
-  text-decoration: underline;
-}
 
 .article p {
   text-align: justify;
@@ -11631,9 +11643,12 @@ body p {
   font-size: 15px;
 }
 
-/* Index */
+
 .divIndex {
-  height: 50vh;
+  /* height: 50vh; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
 }
 
 .indexThumbnail {

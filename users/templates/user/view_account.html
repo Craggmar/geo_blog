@@ -1,0 +1,37 @@
+{% extends 'blogapp/base_container.html' %}
+{% block content %}
+
+<main>  
+  <header class="p-3 border-bottom mb-5">
+    <a href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+      <i class="fa-solid fa-user fa-2xl"></i>
+      <span class="fs-4 ms-3">Konto użytkownika "{{user.bloguser.name}}"</span>
+    </a>
+  </header>
+
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="user-select-none" src='{{user.bloguser.profile_picture.url}}' class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{user.bloguser.name}}</h5>
+          <p class="card-text">{{user.bloguser.description}}</p>
+          <p class="class=text-muted">{{user.date_joined}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!--  -->
+  <p class="">Nazwa: {{user.bloguser.name}}</p>
+  <p class="">{{user.bloguser.description}}</p>
+  <p class="text-muted">{{user.date_joined}}</p>
+  <p class=""><small class="text-muted">Last updated 3 mins ago</small></p>
+
+</main>
+
+
+{% endblock content %}

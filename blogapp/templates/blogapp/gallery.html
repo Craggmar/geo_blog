@@ -2,22 +2,22 @@
 
 {% block content %}
 
-<header class="p-3 border-bottom mb-5">
-  <span href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+<header class="p-3 border-bottom">
+  <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-image fa-2xl"></i>
-    <span class="fs-4 ms-3">Galeria</span>
+    <span class="fs-4 ms-3 fw-bold">Galeria</span>
   </span>
 </header>
 
-<div class="row ">      
+<div class="row bg-light pt-3 mt-3">      
   {% for image in images %}
     {% if image.show_in_gallery %}
-      <div class="col-xl-4 col-md-6 col-sm-12">
-        <div class="mt-2"> 
+      <div class="col-xl-4 col-md-6 col-sm-12 p-3">
+        <div class=""> 
           <div class="divImg user-select-none">
             <img id= "myImg{{image.id}}" class="img-fluid myImg " src="{{image.image.url}}" alt='{{image.topic.title}} &mdash; {{image.description}}'>
           </div> 
-          <div><p class="text-center text-capitalize text-primary fs-4">{{image.name}}</p></div>
+          <div><p class="text-center text-capitalize text-dark fs-4">{{image.name}}</p></div>
         </div>
       </div>
 
@@ -28,27 +28,27 @@
       </div>
   
       <script>
-      // Get the modal
-      var modal = document.getElementById('myModal{{image.id}}');
-      
-      // Get the image and insert it inside the modal - use its "alt" text as a caption
-      var img = document.getElementById('myImg{{image.id}}');
-      var modalImg = document.getElementById("img{{image.id}}");
-      var captionText = document.getElementById("caption{{image.id}}");
-      img.onclick = function(){
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-      }
-      
-      // Get the <span> element that closes the modal
-      var span = document.getElementById("close{{image.id}}");
-      
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() { 
-        modal.style.display = "none";
-      }
-      </script>
+        // Get the modal
+        var modal = document.getElementById('myModal{{image.id}}');
+        
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg{{image.id}}');
+        var modalImg = document.getElementById("img{{image.id}}");
+        var captionText = document.getElementById("caption{{image.id}}");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+            
+            // Get the <span> element that closes the modal
+            var span = document.getElementById("close{{image.id}}");
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() { 
+              modal.style.display = "none";
+            }
+            </script>
     {% endif %}
   {% endfor %}
 

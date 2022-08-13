@@ -1,0 +1,13 @@
+profiles view
+card height
+code clear!
+graphic:
+	logo
+collapse button color
+srollbar modal
+
+1d api?
+1d finish
+2d stronka?
+1d cv, media spolecznosciowe, contact
+1d wdrozenie

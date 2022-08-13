@@ -2,9 +2,9 @@
 {% block content %}
 
 <header class="p-3 border-bottom mb-5">
-  <span href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+  <span class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-file-circle-question fa-2xl"></i>
-    <span class="fs-4 ms-3">Oczekujące tematy</span>
+    <span class="fs-4 ms-3 fw-bold">Oczekujące tematy</span>
   </span>
 </header>
 
@@ -24,16 +24,16 @@
   <tbody>
     {% for topic in topics %}
       <tr>
-        <td><a class="text-decoration-none fw-bold text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
+        <td><a class="text-decoration-none fst-italic text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
         <td>{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</td>
         <td>{{topic.date_modified|date:"d-m-y"}}; {{topic.date_modified|time:"H:i"}}</td>
-        <td><a class="text-decoration-none fw-bold text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></td>
-        <td><a href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square fa-xl"></i></a></td>
-        <td><a href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can fa-xl"></i></a></td>
+        <td ><a class="text-decoration-none fw-bold text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></td>
+        <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square fa-xl"></i></a></td>
+        <td class="ps-3"><a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can fa-xl"></i></a></td>
         <td>
           <form action="{% url 'blogapp:confirm_topic' topic.id %}" method ='post'>
             {% csrf_token %}
-            <button type ='submit' class="icobtn"><i class="fa-solid fa-check"></i></button>       
+            <button type ='submit' class="btn btn-secondary btn-sm ms-4 rounded-circle text-light">&#10003;</button>
           </form>
         </td>        
       </tr>      

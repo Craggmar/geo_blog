@@ -8,45 +8,54 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/web.css' %}">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-    
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <title>Geoblog</title>
+
+    
+    
     
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar_color navbar-primary navbar_font bg-dark bg-gradient text-light user-select-none">
+    <nav class="navbar navbar-expand-lg navbar_color text-light navbar_font bg-dark bg-gradient user-select-none">
       
-      <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:home' %}"><img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"></a> 
+      <a class="navbar-brand text-uppercase ms-3" href="{% url 'blogapp:home' %}">
+        <!-- <img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO"> -->
+        <h1 class="ff-rd text-light">Geoblog</h1>
+      </a> 
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu"
-      aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation"> 
-        <span class="navbar-toggler-icon" ></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation"> 
+        <span class="navbar-toggler-icon text-light" >&#9776;</span>
       </button>
 
       <div class="collapse navbar-collapse" id="mainmenu">
         <ul class="navbar-nav me-auto">
           <li><hr class="dropdown-divider"></li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'blogapp:gallery' %}">Galeria</a>
+            <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'blogapp:about' %}">O stronie</a>
+            <a class ="nav-link" href="{% url 'blogapp:about' %}">O stronie</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'api:api' %}">API</a>
+            <a class ="nav-link" href="{% url 'api:api' %}">API</a>
           </li>
           <li class="nav-item">
-            <a class ="nav-link link-light" href="{% url 'blogapp:terms' %}">Regulamin</a>
+            <a class ="nav-link" href="{% url 'blogapp:terms' %}">Regulamin</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class ="nav-link link-light" href="{% url 'blogapp:contact' %}">Kontakt</a>
-          </li>
+          </li> -->
           <li><hr class="dropdown-divider"></li>
         </ul>
 
-        <form class="d-flex me-3" action="{% url 'blogapp:search_topic' %}" method = 'post'>
+        <form class="d-flex me-5 ff-rd" action="{% url 'blogapp:search_topic' %}" method = 'post'>
           {% csrf_token %}
-          <input class="form-control me-2" type="search" name="searched" placeholder="szukaj" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Szukaj</button>
+          <input class="form-control me-2" type="search" name="searched" placeholder="znajdź temat..." aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Szukaj</button>
         </form>
 
         
@@ -54,10 +63,13 @@
         <ul class="navbar-nav me-3">
           {% if user.is_authenticated %}
           <li class="nav-item mt-2 me-2">
-            Witaj,<a class="text-decoration-none link-light" href="{% url 'users:user_account' %}"> {{user.username}}</a>.
+            <a class="" href="{% url 'users:user_account' %}"> {{user.username}}</a>
+          </li>
+          <li>
+            <img class="nav-item user-select-none rounded-circle" style="max-height:50px;" src='{{request.user.bloguser.profile_picture.url}}' alt="...">
           </li>
           <li class="nav-item">
-            <a class="nav-link link-light" href="{% url 'users:logged_out' %}">Wyloguj się</a>
+            <a class="nav-link " href="{% url 'users:logged_out' %}">Wyloguj się</a>
           </li>
           {% else %}
           <li class="nav-item">
@@ -72,59 +84,69 @@
     </nav>
 
     {% if request.user.is_authenticated %}
-    <div class="container nav-scroller mb-2 link-dark">
-      <nav class="nav d-flex justify-content-evenly link-dark">
-        <a class="p-2 link-dark" href="{% url 'blogapp:pending_topics' %}">Oczekujące tematy</a>
-        <a class="p-2 link-dark" href="{% url 'blogapp:my_topics' %}">Moje tematy</a>
-        {% if perms.blogapp.add_topic %}
-        <a class="p-2 link-dark" href="{% url 'blogapp:new_topic' %}">Dodaj temat</a>
-        {% endif %}        
-        <a class="p-2 link-dark" href="{% url 'blogapp:terms' %}">Regulamin</a>
-        <a class="p-2 link-dark" href="{% url 'users:user_account' %}">Konto Użytkownika</a>   
-      </nav>
-    </div>
-    {% endif %}
-    
+      {% if perms.blogapp.add_topic %}
+      <div class="container nav-scroller mb-2 link-dark fw-bold">
+        <nav class="nav d-flex justify-content-evenly link-dark">
+          <a class="p-2 link-secondary" href="{% url 'blogapp:pending_topics' %}">Oczekujące tematy</a>          
+          <a class="p-2 link-secondary" href="{% url 'blogapp:my_topics' %}">Moje tematy</a>        
+          <a class="p-2 link-secondary" href="{% url 'blogapp:new_topic' %}">Dodaj temat</a>                
+          <a class="p-2 link-secondary" href="{% url 'blogapp:terms' %}">Regulamin</a>
+          <a class="p-2 link-secondary" href="{% url 'users:user_account' %}">Konto Użytkownika</a>   
+        </nav>
+      </div>
+      {% endif %} 
+    {% endif %}    
       
-      {% block base %}{% endblock base %}
+      {% block base %}
+      {% endblock base %}
       
-      <footer class="footer bg-dark bg-gradient py-2">  
-        <div class="row justify-content-evenly mx-0 text-light">
-          <div class="col-md-3">
-              <ul class="list-inline">
-                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-github fa-3x"></a></i></li>
-                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-linkedin fa-3x"></a></i></li>
-                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-solid fa-envelope fa-3x"></a></i></li> 
-                <li class="list-inline-item mx-3"><a class="link-light" href=""><i class="fa-brands fa-facebook fa-3x"></a></i></li>
+      <footer class="footer bg-dark bg-gradient p-3">  
+        <div class="container">   
+          <div class="row text-light">          
+            <div class="col-lg-4 col-12 d-flex flex-column align-items-center py-3">
+              <h5 class="text-center fs-4 ff-rd">KONTAKT</h5>
+                <ul class="nav mt-4">
+                  <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-github fa-3x"></a></i></li>
+                  <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-linkedin fa-3x"></a></i></li>
+                  <li class="nav-item"><a class="nav-link" href=""><i class="fa-brands fa-facebook fa-3x"></a></i></li>
+                  <li class="nav-item"><a class="nav-link" href=""><i class="fa-solid fa-envelope fa-3x"></a></i></li> 
+                </ul>
+            </div>
+            <div class="col-lg-4 col-6 d-flex flex-column align-items-center py-3">
+              <h5 class="text-center fs-4 ff-rd">NAWIGACJA</h5>
+              <ul class="nav flex-column mt-2">
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'blogapp:home' %}">Strona główna</a>
+                </li>
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'blogapp:gallery' %}">Galeria</a>
+                </li>
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'api:api' %}">API</a>
+                </li>
               </ul>
-          </div>
-
-          <!-- <div class="col-md-9 order-md-first d-flex justify-content-center user-select-none">                                                    
-            <div class="tile author " data-bs-toggle="tooltip" title="Strona www">                                
-              <a class="link" href="#"><i class=" icon-id-card-o"></i></a>
-            </div>                            
-            <div class="tile email" data-bs-toggle="tooltip" title="Email">
-              <a href="#"><i class="icon-mail"></i></a>
             </div>
-            <div class="tile fb" data-bs-toggle="tooltip" title="Facebook">
-              <a href="#"><i class="icon-facebook-squared"></i></a>
+            <div class="col-lg-4 col-6 d-flex flex-column align-items-center py-3">
+              <h5 class="text-center fs-4 ff-rd">REJESTRACJA</h5>
+              <ul class= "nav flex-column mt-2d">
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'blogapp:terms' %}">Regulamin</a>
+                </li>
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'users:register' %}">Zarejestruj się</a>
+                </li>
+                <li class="nav-item">
+                  <a class ="nav-link" href="{% url 'users:login' %}">Zaloguj się</a>
+                </li>
+              </ul>
             </div>
-            <div class="tile in" data-bs-toggle="tooltip" title="LinkedIn">
-              <a href="#"><i class="icon-linkedin"></i></a>
-            </div>
-            <div class="tile github" data-bs-toggle="tooltip" title="GitHub">
-              <a href="#"><i class="icon-github-circled fs-1"></i></a>
-            </div>
-              
-          </div>                 -->
-          <div class="col-12 text-center text-light">
-            <img class="img-fluid logo" src="{% static 'images/_defaults/logo.png' %}" alt="LOGO">
-            <p class="text-muted"> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a href="https://pl.wikipedia.org/">Wikipedia</a>
-          i innych źródeł licencji Creative Commons. </p>
           </div>
         </div>
-        
-        </footer>
+        <div class="text-center">              
+          <p class="text-muted"> © Copyright 2022. Strona została wykonana w celach prezentacyjnych. Treść pochodzi z portralu <a class ="" href="https://pl.wikipedia.org/">Wikipedia</a>
+            i źródeł licencji Creative Commons. </p>
+        </div>               
+      </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body> 

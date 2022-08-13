@@ -4,7 +4,7 @@
 <header class="p-3 border-bottom mb-5">
   <span href="/" class="d-flex align-items-center  text-dark text-decoration-none">
     <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-    <span class="fs-4 ms-3">Edytuj temat: {{topic.title}}</span>
+    <span class="fs-4 ms-3 fw-bold">Edytuj temat: {{topic.title}}</span>
   </span>
 </header>
 <div class="row justify-content-center">
@@ -21,12 +21,12 @@
       <div class="mb-3">
         <label for="description" class="form-label fw-bold">Opis tematu:</label>
         {{form.description}}
-        <div class="form-text">Kilkuzdaniowy opis tematu.</div>
+        <div class="form-text">Opis tematu w kilku zdaniach.</div>
       </div>
       <div class="mb-5">
         <label for="text" class="form-label fw-bold">Treść tematu:</label>
         {{form.text}}
-        <div class="form-text">Przykład:<h4>Twój nagłówek</h4><p>Twoja treść</p></div>
+        <div class="form-text">Przykład: &lt;h4&gt;Twój nagłówek&lt;/h4&gt; &lt;p&gt;Twoja treść&lt;/p&gt;</div>
       </div>
       <div class="mb-5">
         <label for="header_image" class="form-label fw-bold">Zdjęcie tematu:</label>
@@ -37,7 +37,7 @@
         {{form.header_image_description}}
         <div class="form-text">Krótki opis grafiki.</div>
       </div>
-      <button type="submit" class="btn btn-primary">Zapisz</button>
+      <button type="submit" class="btn btn-secondary ff-rd">Zapisz</button>
     </form>
 
   </div>

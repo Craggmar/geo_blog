@@ -1,71 +1,61 @@
 {% extends 'blogapp/base_container.html' %}
 {% block content %}
 
-<main>  
-  <header class="p-3 border-bottom mb-5">
-    <a href="/" class="d-flex align-items-center  text-dark text-decoration-none">
-      <i class="fa-solid fa-user fa-2xl"></i>
-      <span class="fs-4 ms-3">Konto użytkownika</span>
-    </a>
-  </header>
-
-  <div class="p-3 mb-4 rounded-3">
-    <div class="">
-      <div class="">
-        <div class="row g-1">
-          <div class="col-md-3">
-            <div class="card border border-2 border-dark">
-              <img class=" user-select-none" src='{{request.user.bloguser.profile_picture.url}}' class="card-img-top" alt="...">
-              <div class="card-body">
-                <h3 class="card-title text-center border-bottom pb-3">{{request.user.bloguser.name}}</h3>
-                <p class="text-center text-muted">{{request.user.bloguser.permission_group}}</p>
-                <p class="fs-6 fst-italic card-text">{{request.user.bloguser.description}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8 bg-light offset-md-1">
-            <div class="p-3">
-              <form action="{% url 'users:user_account'  %}" method = 'post' enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="mb-3">
-                  <label for="name" class="form-label fw-bold">Nazwa użytkownika:</label>
-                  {{form.name}}
-                  <div class="form-text">Nazwa wyświetlana na stronie.</div>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label fw-bold">Email:</label>
-                  {{form.email}}
-                  <div class="form-text">Adres e-mail</div>
-                </div>
-                <div class="mb-3">
-                  <label for="first_name" class="form-label fw-bold">Imię:</label>
-                  {{form.first_name}}
-                </div>
-                <div class="mb-3">
-                  <label for="last_name" class="form-label fw-bold">Nazwisko:</label>
-                  {{form.last_name}}
-                </div>
-                <div class="mb-3">
-                  <label for="description" class="form-label fw-bold">Opis:</label>
-                  {{form.description}}
-                </div>
-                
-                <div class="mb-3">
-                  <label for="profile_picture" class="form-label fw-bold">Awatar</label>
-                  <input class="form-control" name="profile_picture" type="file">
-                  <div class="form-text">Wymiary grafiki powinny być identyczne.</div>
-                </div>
-                <button type="submit" class="btn btn-primary ms-auto">Zapisz</button>
-              </form>
-
-              <!-- <h5 class="card-title">{{user.username}}</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-            </div>
-          </div>
+ 
+<header class="p-3 border-bottom mb-5">
+  <a href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+    <i class="fa-solid fa-user fa-2xl"></i>
+    <span class="fs-4 ms-3 fw-bold">Konto użytkownika</span>
+  </a>
+</header>
+<main> 
+  <div class="row g-1">        
+    <div class="col-md-3">
+      <div class="card border border-2 border-dark">
+        <img class="user-select-none" src='{{request.user.bloguser.profile_picture.url}}' class="card-img-top" alt="...">
+        <div class="card-body">
+          <h3 class="card-title text-center border-bottom pb-3">{{request.user.bloguser.name}}</h3>
+          <p class="text-center text-muted">{{request.user.bloguser.permission_group}}</p>
+          <p class="fs-6 fst-italic card-text">{{request.user.bloguser.description}}</p>
         </div>
       </div>
     </div>
+    <div class="col-md-8 bg-light offset-md-1">
+      <div class="p-3">
+        <form action="{% url 'users:user_account'  %}" method = 'post' enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label fw-bold">Nazwa użytkownika:</label>
+            {{form.name}}
+            <div class="form-text">Nazwa wyświetlana na stronie.</div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold">Email:</label>
+            {{form.email}}
+            <div class="form-text">Adres e-mail</div>
+          </div>
+          <div class="mb-3">
+            <label for="first_name" class="form-label fw-bold">Imię:</label>
+            {{form.first_name}}
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label fw-bold">Opis:</label>
+            {{form.description}}
+            <div class="form-text">Maksymalnie 200 znaków.</div>
+          </div>                
+          <div class="mb-3">
+            <label for="profile_picture" class="form-label fw-bold">Awatar</label>
+            <input class="form-control" name="profile_picture" type="file">
+            <div class="form-text">Wymiary grafiki ( X, Y ) powinny być identyczne.</div>
+          </div>
+          <button type="submit" class="btn btn btn-secondary ff-rd">Zapisz</button>
+        </form>
+
+        <!-- <h5 class="card-title">{{user.username}}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>        
   </div>
 </main>
 

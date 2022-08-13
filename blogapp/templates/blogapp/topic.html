@@ -3,53 +3,52 @@
 
 {% block content %}
 <header class="p-3 border-bottom mb-5">
-  <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
+  <span class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-book-open fa-2xl"></i>
     <span class="fs-4 ms-3">{{topic.title}}</span>
   </span>
 </header>
 
 <div class="row bg-light">
-  <!-- HEADER -->  
-    
-      <div class="col-lg-9 order-2 order-lg-1">
-        <img class="img-fluid user-select-none" src="{{topic.header_image.url}}">
-        <p class="mx-3 fs-6 fst-italic text-muted">{{topic.header_image_description}}</p>
+  <!-- HEADER -->      
+      <div class="col-lg-9 order-2 order-lg-1 user-select-none">
+        <img class="img-fluid" src="{{topic.header_image.url}}">        
       </div>
       <!-- AUTHOR SECTION -->
-      <div class="col-lg-3 order-1 order-lg-2 border-top border-bottom">
-        <div class="mx-auto p-2">
-          <p class="fst-italic text-center fs-5">Utworzono {{topic.date_created|date:"j. E Y"}}</p>
+      <div class="col-lg-3 order-1 order-lg-2 flex-column align-items-center border mb-3 mb-lg-0 user-select-none">        
+          <p class="fst-italic text-center fs-5 mt-2">Utworzono {{topic.date_created|date:"j. E Y"}}</p>
           <p class="fst-italic text-center">przez:</p>
-          <img class="d-block img-thumbnail rounded-circle mx-auto" style="width:70%" src='{{topic.owner.bloguser.profile_picture.url}}' alt="User_image">
-          <p class="fst-italic text-center fs-4"><a class="text-decoration-none text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></p>
-        
-        {% if user == topic.owner %}
-            <ul class="list-inline mt-5 text-center">
+          <a class="link-dark" href="{% url 'users:view_account' topic.owner.username %}">
+            <img class="d-block img-thumbnail rounded-circle mx-auto" style="width:70%" src='{{topic.owner.bloguser.profile_picture.url}}' alt="User_image">          
+            <p class="fst-italic text-center fs-4">{{topic.owner}}</p>
+          </a>
+          {% if user == topic.owner %}
+            <ul class="list-inline mt-4 text-center">
               <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edytuj">
-                <a href="{% url 'blogapp:edit_topic' topic.id %}">
+                <a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}">
                   <i class="fa-solid fa-pen-to-square fa-2x"></i>
                 </a>
               </li>
               <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuń">
-                <a href="{% url 'blogapp:delete_topic' topic.id %}">
-                  <i class="fa-solid fa-file-circle-xmark fa-2x"></i>
+                <a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}">
+                  <i class="fa-solid fa-trash-can fa-2x"></i>
                 </a>
               </li>
-              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Zdjęcia">
-                <a href="/">
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Dodaj obraz">
+                <a class="link-secondary" href="{% url 'blogapp:add_image' topic.id %}">
                   <i class="fa-solid fa-image fa-2x"></i>
                 </a>
               </li>
             </ul>         
-        {% endif %}
-        </div>   
+          {% endif %}
+          
       </div>
     
   
   <!-- MAIN ARTICLE -->
   <div class="col-lg-9 order-3 px-4 mb-5">
-    <div class="description_field pb-5"><h2 class="h4">{{topic.description}}</h2></div>
+    <p class="mx-3 fs-6 fst-italic text-muted">{{topic.header_image_description}}</p>
+    <div class="description_field pb-3 fst-italic"><h2 class="h4">{{topic.description}}</h2></div>
     <div class="py-3 article border-3 border-top border-bottom">
       {{topic.text|safe}}
     </div>
@@ -83,7 +82,7 @@
           <div class="mb-3">
             <textarea class="form-control" name="text" rows="8"></textarea>
           </div>
-          <button type ='submit' class="btn btn-secondary">Dodaj komentarz</button>       
+          <button type ='submit' class="btn btn-secondary ff-rd text-light">Dodaj komentarz</button>       
       </form>
       {% else %}
       <p class="p-3 fw-bold">Musisz być zalogowany aby móc dodawać komentarze.</p>
@@ -91,13 +90,21 @@
     </div>
   </div>
   <!-- IMAGES BAR -->
-  <div class="col-lg-3 order-4">
+  <div class="col-lg-3 order-4 mt-5">
     {% if images %}   
       {% for image in images %}
-        <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}" alt="{{image.description}}">
-        <p class ="m-0 p-0 text-center">{{image.name}}</p>
+      <div class="position-relative text-center">
+        <img id = myImg{{image.id}} class="img-thumbnail myImg position-relative" src="{{image.image.url}}" alt="{{image.description}}">
+        {% if user == topic.owner %}
+          <form class="position-absolute bottom-0 end-0" action="{% url 'blogapp:delete_image' topic.id image.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuń obraz"><i class="fa-solid fa-trash-can text-secondary fa-2x"></i></button>
+          </form>
+        {% endif %}
+      </div>  
+      <p class ="text-center">{{image.name}}</p>       
 
-        <div id="myModal{{image.id}}" class="modal user-select-none">
+      <div id="myModal{{image.id}}" class="modal user-select-none">
       <span id="close{{image.id}}" class="close">&times;</span>
       <img class="modal-content" id="img{{image.id}}">
       <div id="caption{{image.id}}" class="caption"></div>
@@ -127,9 +134,6 @@
         }
         </script>
       {% endfor %}
-    {% endif %}
-    {% if user == topic.owner %}
-      <a href="{% url 'blogapp:add_image' topic.id %}"><p class="text-end pe-1 mt-4">Dodaj obraz</i></p></a>
     {% endif %}
   </div>  
 

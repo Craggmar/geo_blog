@@ -66,7 +66,7 @@ def contact(request):
 def search_topic(request):
     all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
     topics = []
-    if request.method == 'POST':  
+    if request.method == 'POST':
         searched = request.POST['searched']
         for topic in all_topics:
             if searched.lower() in topic.title.lower():
@@ -74,7 +74,7 @@ def search_topic(request):
     context ={'topics': topics, 'searched':searched}
     return render(request, 'blogapp/search_topic.html', context)
 
-def topic(request, topic_id):
+def topic(request, topic_id, image_id=None):
     topic =    get_object_or_404(Topic, id=topic_id)
     comments = topic.comment_set.order_by('-date_created')
     images = topic.image_set.all()
@@ -83,6 +83,8 @@ def topic(request, topic_id):
     if request.method != 'POST':
         form = CommentForm()
     else:
+        if image_id != None:
+            redirect ('blogapp:delete_image', topic_id, image_id)
         form = CommentForm(data=request.POST)
         if form.is_valid():
             new_comment = form.save(commit=False)
@@ -144,7 +146,7 @@ def edit_topic(request, topic_id):
         form = TopicForm(request.POST, request.FILES, instance=topic)
         if form.is_valid:
             form.save()
-            return redirect('blogapp:topic', topic_id=topic.id)
+            return redirect('blogapp:topic', topic.id)
 
     context = {'topic':topic, 'form':form}
 
@@ -183,3 +185,8 @@ def add_image(request, topic_id):
             return redirect('blogapp:topic', topic_id=topic.id)
     context = {'topic':topic, 'form':form}
     return render(request, 'blogapp/add_image.html', context)
+
+def delete_image(request, topic_id, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    image.delete()
+    return redirect('blogapp:topic', topic_id)

@@ -29,6 +29,8 @@ urlpatterns = [
     path('delete_topic/(<int:topic_id>)/', views.delete_topic, name='delete_topic'),
     #add image
     path('add_image/(<int:topic_id>)/', views.add_image, name='add_image'),
+    #delete image
+    path('delete_image/(<int:topic_id>-<int:image_id>)/', views.delete_image, name='delete_image'),
      #About
     path('terms/', views.terms, name='terms'),
     #search

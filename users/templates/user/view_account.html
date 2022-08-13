@@ -3,33 +3,37 @@
 
 <main>  
   <header class="p-3 border-bottom mb-5">
-    <a href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+    <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
       <i class="fa-solid fa-user fa-2xl"></i>
-      <span class="fs-4 ms-3">Konto użytkownika "{{user.bloguser.name}}"</span>
-    </a>
-  </header>
+      <span class="fs-4 ms-3 fw-bold">Konto użytkownika "{{user.bloguser.name}}"</span>
+    </span>
+  </header>  
 
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img class="user-select-none" src='{{user.bloguser.profile_picture.url}}' class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
+  <div class="row justify-content-center">        
+    <div class="col-md-3">
+      <div class="card border border-2 border-dark">
+        <img class="user-select-none" src='{{request.user.bloguser.profile_picture.url}}' class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{user.bloguser.name}}</h5>
-          <p class="card-text">{{user.bloguser.description}}</p>
-          <p class="class=text-muted">{{user.date_joined}}</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <h3 class="card-title text-center border-bottom pb-3">{{request.user.bloguser.name}}</h3>
+          <p class="text-center text-muted">{{request.user.bloguser.permission_group}}</p>
+          <p class="fs-6 fst-italic card-text">{{request.user.bloguser.description}}</p>
         </div>
       </div>
     </div>
+    <div class="col-md-3 bg-light border border-2 border-dark">  
+      <p class="">Nazwa: {{user.bloguser.name}}</p>
+      <p class="">Imię: {{user.bloguser.first_name}}</p>
+      <p class="">Liczba dodanych tematów: {{topics_amount}}</p>
+      <p class="">Liczba komentarzy: {{comments_amount}}</p>
+      <p class="">Dołączył: {{user.date_joined}}</p>
+        {% if user.is_active %}
+        <p class="">Stan konta: Aktywne</p>
+        {% else %}
+        <p class="">Stan konta: Zamorożone</p>
+        {% endif %}      
+      <p class=""><small class="text-muted">Ostatnio aktywny:</small></p>
+    </div>        
   </div>
- 
-  <!--  -->
-  <p class="">Nazwa: {{user.bloguser.name}}</p>
-  <p class="">{{user.bloguser.description}}</p>
-  <p class="text-muted">{{user.date_joined}}</p>
-  <p class=""><small class="text-muted">Last updated 3 mins ago</small></p>
 
 </main>
 

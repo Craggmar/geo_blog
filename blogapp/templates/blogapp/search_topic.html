@@ -2,7 +2,7 @@
 {% block content %}
 
 <header class="p-3 border-bottom mb-5">
-  <span class="d-flex align-items-center  text-dark text-decoration-none">
+  <span class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
     <span class="fs-4 ms-3">Wyniki wyszukiwania dla: "{{searched}}"</span>
   </span>
@@ -15,7 +15,7 @@
         <img class="img-fluid indexThumbnail" src="{{ topic.header_image.url }}">
         <div class="card-body">
           <h3 class="text-center"><a class="text-decoration-none text-dark" href="{% url 'blogapp:topic' topic.id %}" class="link-dark">{{topic.title}}</a></h3>
-          <p class="card-text">{{topic.description}}</p>
+          <p class="card-text">{{topic.short_description}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <a class="" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>

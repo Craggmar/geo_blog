@@ -2,20 +2,20 @@ from django.shortcuts import render,redirect
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import Group, User
-from django.contrib import messages
 from django.conf import settings
 
 from users.decorators import unauthenticated_user
 from .forms import CreateUserForm, EditUserProfileForm, CreateUserForm
 from.models import BlogUser
+from blogapp.models import Comment, Topic
 
 from.decorators import unauthenticated_user
 
 import os
 
-
-@unauthenticated_user
 def register(request):
+    if request.user.is_authenticated:
+        logout(request)
 
     if request.method !="POST":
         form = CreateUserForm()
@@ -55,8 +55,12 @@ def user_account(request):
 
 def view_account(request, username):
     user = User.objects.get(username=username)
+    comments = Comment.objects.filter(owner=user)
+    topics = Topic.objects.filter(owner=user)
+    comments_amount = len(comments)
+    topics_amount = len(topics)
 
-    context = {'user':user}
+    context = {'user':user, 'comments_amount':comments_amount, 'topics_amount':topics_amount}
     return render(request, 'user/view_account.html', context)
 
 

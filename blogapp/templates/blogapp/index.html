@@ -2,24 +2,26 @@
 {% block base %}
 
 <div class="container mt-3">
-  <header class="p-3 border-bottom mb-5">
-    <span class="d-flex align-items-center  text-dark text-decoration-none">
-      <i class="fa-solid fa-house fa-2xl"></i>
-      <span class="fs-4 ms-3">Strona główna &mdash; ostatnie artykuły</span>
+  
+  <header class="p-3 border-bottom">
+    <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
+      <i class="fa-solid fa-house fa-2x"></i>
+      <span class="fs-4 ms-3 fw-bold ">Strona główna &mdash; ostatnie artykuły</span>
     </span>
   </header>
+
   <!-- HEADER ARTICLE -->  
   {% if not page.nr and last_topic %}
   <header class="">
-    <div class="text-dark rounded bg-light my-3">
+    <div class="text-dark rounded bg-dark my-3">
         <div class="row">
         <div class="col-lg-6 p-4 order-last order-lg-first">
-          <a class="text-decoration-none" href="{% url 'blogapp:topic' last_topic.id %}" class=""><h1 class="display-4 fst-italic text-dark">{{last_topic.title}}</h1></a></p>          
-          <p class="lead my-3" style="text-align: justify;">{{last_topic.description}}</p>
-          <p class="lead mb-0"><a class="text-decoration-none fs-4" href="{% url 'blogapp:topic' last_topic.id %}" class="text-white fw-bold">Czytaj dalej...</a></p>
+          <a class="text-decoration-none ff-rd link-light" href="{% url 'blogapp:topic' last_topic.id %}"><h1 class="display-4">{{last_topic.title}}</h1></a></p>          
+          <p class="lead my-3 text-light fst-italic" style="text-align:justify;">{{last_topic.description}}</p>
+          <p class="mb-0"><a class="text-decoration-none fs-4" href="{% url 'blogapp:topic' last_topic.id %}" >Czytaj dalej...</a></p>
         </div>
         <div class="col-lg-6 mx-auto">
-          <img class="img-fluid p-2" src="{{last_topic.header_image.url}}">
+          <img class="img-fluid p-1" style="border-radius: 30px 0px 0px 30px;" src="{{last_topic.header_image.url}}">
         </div>
       </div>    
     </div>      
@@ -29,17 +31,17 @@
 <!-- REST ARTICLEs -->
 <div class="container-fluid bg-light">
   <div class="container my-3">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {% for topic in topics %}
         <div class="col">
-          <div class="card shadow-sm border-secondary divIndex">
+          <div class="card shadow-sm divIndex">
             <img class="img-fluid indexThumbnail" src="{{ topic.header_image.url }}">
-            <div class="card-body">
-              <h3 class="text-center"><a class="text-decoration-none text-dark" href="{% url 'blogapp:topic' topic.id %}" class="link-dark">{{topic.title}}</a></h3>
+            <div class="card-body" style="min-height:270px;">
+              <h3 class="text-center fw-bold"><a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></h3>
               <p class="card-text">{{topic.short_description}}</p>
               <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <a class="" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej</a>
+                <div class="">
+                  <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>
                 </div>
                 <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
               </div>
@@ -54,7 +56,7 @@
     </div>
   </div>
     <!--PAGGINATION  -->
-  <nav aria-label="...">
+  <nav class="p-md-4 p-2" aria-label="...">
     <ul class="pagination pagination-lg justify-content-center user-select-none">
       {% if page.nr > 0 %}
       <li class="page-item">

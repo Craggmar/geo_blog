@@ -1,4 +1,3 @@
-from pickle import TRUE
 from django.db import models
 from django.contrib.auth.models import User
 import PIL.Image
@@ -12,8 +11,7 @@ class BlogUser(models.Model):
     name = models.CharField(max_length=30, blank=True)    
     email = models.CharField(max_length=30, blank=True)
     first_name = models.CharField(max_length=30, blank=True,)
-    last_name = models.CharField(max_length=30, blank=True,)
-    description = models.CharField(max_length=100, default="Napisz coś o sobie...")
+    description = models.CharField(max_length=200, default="Napisz coś o sobie...")
     profile_picture = models.ImageField(blank=True, default="_defaults/default_user.png", upload_to = user_profile_images_path)
     permission_group = models.CharField(max_length=20, blank=True)
 

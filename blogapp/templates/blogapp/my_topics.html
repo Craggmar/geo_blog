@@ -2,9 +2,9 @@
 {% block content %}
 
 <header class="p-3 border-bottom mb-5">
-  <span href="/" class="d-flex align-items-center  text-dark text-decoration-none">
+  <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-folder-open fa-2xl"></i>
-    <span class="fs-4 ms-3">Moje tematy</span>
+    <span class="fs-4 ms-3 fw-bold">Moje tematy</span>
   </span>
 </header>
 
@@ -24,11 +24,11 @@
   <tbody>
     {% for topic in topics %}
       <tr>
-        <td><a class="text-decoration-none fw-bold text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
-        <td>{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</td>
-        <td>{{topic.date_modified|date:"d-m-y"}}; {{topic.date_modified|time:"H:i"}}</td>
-        <td><a href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-        <td><a href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can"></i></a></td>
+        <td class=""><a class="text-decoration-none fst-italic text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
+        <td class="">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</td>
+        <td class="">{{topic.date_modified|date:"d-m-y"}}; {{topic.date_modified|time:"H:i"}}</td>
+        <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+        <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can"></i></a></td>
         {% if topic.confirmed %}
           <td>Zatwierdzony</td>
         {% else %}
@@ -39,7 +39,7 @@
   </tbody>
 </table>
 {% else %}
-  brak tematow
+<p class="p-3 fw-bold text-center">Nie dodałeś jeszcze żadnego tematu.<br><a class="link-dark fs-3" href="{% url 'blogapp:new_topic' %}">Dodaj temat</a></p>
 {% endif %}
 
 

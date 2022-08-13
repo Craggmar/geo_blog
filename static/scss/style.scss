@@ -1,7 +1,20 @@
 $pagination-bg: white;
-$secondary: #bcffda;
+// orange $primary: rgb(240, 180, 0);
+// nb $secondary: rgb(74, 156, 211);
+// ft $primary: rgb(180, 80, 195);
+// braz $primary: rgb(112, 83, 53);
+$primary: rgb(74, 156, 211);
+$secondary:rgb(112, 83, 53);
+$link-decoration:none;
+$link-hover-decoration: underline;
+
+
 
 @import "bootstrap/bootstrap";
+
+.ff-rd{
+  font-family:Rubik Dirt;
+}
 
 body {
   background-color: white !important;

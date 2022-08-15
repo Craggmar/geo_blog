@@ -25,8 +25,6 @@ class Topic(models.Model):
             return self.description[:lenght]+'...'
         else:
             return self.description
-
-
     
     def __str__(self):
         return self.title.capitalize()

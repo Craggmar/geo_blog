@@ -9,8 +9,7 @@ class CreateUserForm(UserCreationForm):
   password1 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Hasło"}))
   password2 = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Potwierdź hasło"}))
   choice_list = [('regular_users', 'Zwykły użytkownik'),('extended_users', 'Użytkownik+ (dodawanie treści)')]
-  permissions = forms.ChoiceField(choices= choice_list, widget=forms.RadioSelect)
-  
+  permissions = forms.ChoiceField(choices= choice_list, widget=forms.RadioSelect)  
 
   class Meta:
     model = User
@@ -22,15 +21,13 @@ class EditUserProfileForm(forms.ModelForm):
   first_name = forms.CharField(required=False, widget=forms.TextInput())
   description = forms.CharField(required=False, widget=forms.Textarea(attrs={"rows":2}), max_length=200)
 
-
   class Meta:
     model = BlogUser
     fields = '__all__'
-    exclude =['user']
-
-  
+    exclude =['user']  
   
 class EditProfilePicture(forms.ModelForm):
+
   class Meta:
     model = BlogUser
     fields = ["profile_picture"]

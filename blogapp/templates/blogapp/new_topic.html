@@ -9,7 +9,7 @@
 </header>
 
 <div class="row justify-content-center">
-  <div class="col-10 col-lg-8 bg-light p-3">
+  <div class="col-10 col-lg-8 p-5 border border-secondary rounded">
 
 <form action="{% url 'blogapp:new_topic' %}" method = 'post' enctype="multipart/form-data" >
     {% csrf_token %}

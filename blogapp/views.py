@@ -6,7 +6,6 @@ from users.decorators import allowed_users
 import os
 import shutil
 
-
 from .models import Topic, Image
 from .forms import CommentForm, TopicForm, ImageForm
 
@@ -15,11 +14,16 @@ def home(request):
 
 def index(request, page_nr):
     all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
-    topics = all_topics[1:]
     try:
         last_topic = all_topics[0]
     except IndexError:
         last_topic = None
+        
+    try:
+        topics = all_topics[1:]
+    except IndexError:
+        topics = []
+    
 
     numbers_of_topic_for_single_page = 6
     tpp = numbers_of_topic_for_single_page
@@ -37,21 +41,18 @@ def index(request, page_nr):
             if self.nr >0:
                 self.prev_nr = self.nr - 1
             else:
-                self.prev_nr = 0
-    
+                self.prev_nr = 0    
     
     page = Page()
 
     context = {'topics': visible_topics, 'last_topic':last_topic, 'page': page,}
     return render(request, 'blogapp/index.html', context)
 
-
 def about(request):
     return render(request, 'blogapp/about.html')
 
 def terms(request):
     return render(request, 'blogapp/terms.html')
-
 
 def gallery(request):
     all_images = Image.objects.all()    
@@ -83,21 +84,21 @@ def topic(request, topic_id, image_id=None):
     if request.method != 'POST':
         form = CommentForm()
     else:
-        if image_id != None:
+        if image_id:
             redirect ('blogapp:delete_image', topic_id, image_id)
         form = CommentForm(data=request.POST)
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.topic = topic
             new_comment.owner = request.user
-            new_comment.save()
-        return redirect('blogapp:topic', topic.id)
+            new_comment.save()        
    
     context ={'topic': topic, 'comments': comments, 'form': form,'images':images,}
     return render(request, 'blogapp/topic.html', context)
 
 def my_topics(request):    
-    topics = Topic.objects.filter(owner=request.user).order_by('-date_created')
+    # topics = Topic.objects.filter(owner=request.user).order_by('-date_created')
+    topics = request.user.topic_set.order_by('-date_created')
     
     context = {'topics': topics,}
     return render(request, 'blogapp/my_topics.html', context)
@@ -185,6 +186,7 @@ def add_image(request, topic_id):
             return redirect('blogapp:topic', topic_id=topic.id)
     context = {'topic':topic, 'form':form}
     return render(request, 'blogapp/add_image.html', context)
+
 
 def delete_image(request, topic_id, image_id):
     image = get_object_or_404(Image, id=image_id)

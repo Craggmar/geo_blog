@@ -6,7 +6,7 @@
   <header class="p-3 border-bottom">
     <span href="/" class="d-flex align-items-center text-dark text-decoration-none">
       <i class="fa-solid fa-house fa-2x"></i>
-      <span class="fs-4 ms-3 fw-bold ">Strona główna &mdash; ostatnie artykuły</span>
+      <span class="fs-4 ms-3 fw-bold mt-2">Strona główna &mdash; ostatnie artykuły</span>
     </span>
   </header>
 
@@ -15,10 +15,10 @@
   <header class="">
     <div class="text-dark rounded bg-dark my-3">
         <div class="row">
-        <div class="col-lg-6 p-4 order-last order-lg-first">
-          <a class="text-decoration-none ff-rd link-light" href="{% url 'blogapp:topic' last_topic.id %}"><h1 class="display-4">{{last_topic.title}}</h1></a></p>          
-          <p class="lead my-3 text-light fst-italic" style="text-align:justify;">{{last_topic.description}}</p>
-          <p class="mb-0"><a class="text-decoration-none fs-4" href="{% url 'blogapp:topic' last_topic.id %}" >Czytaj dalej...</a></p>
+        <div class="col-lg-6 py-2 px-4 order-last order-lg-first">
+          <a class="text-decoration-none ff-rd link-light" href="{% url 'blogapp:topic' last_topic.id %}"><h1 class="display-4">{{last_topic.title}}</h1></a>         
+          <p class="lead text-light fst-italic fs-4" style="text-align:justify;">{{last_topic.short_description}}</p>
+          <a class="text-decoration-none fs-5" href="{% url 'blogapp:topic' last_topic.id %}" >Czytaj dalej...</a>
         </div>
         <div class="col-lg-6 mx-auto">
           <img class="img-fluid p-1" style="border-radius: 30px 0px 0px 30px;" src="{{last_topic.header_image.url}}">
@@ -34,24 +34,20 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {% for topic in topics %}
         <div class="col">
-          <div class="card shadow-sm divIndex">
-            <img class="img-fluid indexThumbnail" src="{{ topic.header_image.url }}">
-            <div class="card-body" style="min-height:270px;">
-              <h3 class="text-center fw-bold"><a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></h3>
-              <p class="card-text">{{topic.short_description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="">
-                  <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>
-                </div>
+          <div class="card shadow-sm" style="min-height:100% !important;">
+            <img class="img-fluid" src="{{ topic.header_image.url }}">
+            <div class="card-body">
+              <h3 class="text-center fw-bold fs-2"><a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title|upper}}</a></h3>
+              <p class="card-text">{{topic.short_description}}</p>              
+              <div class="d-flex justify-content-between mt-auto" style="height: 100%;">                
+                  <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>                
                 <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
               </div>
             </div>
           </div>
         </div>
       {% empty %}
-        <li>
-          No topics found
-        </li>
+        Brak tematów
       {% endfor %}
     </div>
   </div>

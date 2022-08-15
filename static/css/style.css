@@ -1,3 +1,11 @@
+.navbar-dark .navbar-nav .nav-link {
+  color: #4a9cd3 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+  color: #246693 !important;
+}
+
 /*!
  * Bootstrap v5.0.2 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -19,7 +27,7 @@
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
   --bs-primary: #4a9cd3;
-  --bs-secondary: #705335;
+  --bs-secondary: #705336;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
@@ -3234,43 +3242,43 @@ fieldset:disabled .btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #705335;
-  border-color: #705335;
+  background-color: #705336;
+  border-color: #705336;
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5f472d;
-  border-color: #5a422a;
+  background-color: #5f472e;
+  border-color: #5a422b;
 }
 
 .btn-check:focus + .btn-secondary, .btn-secondary:focus {
   color: #fff;
-  background-color: #5f472d;
-  border-color: #5a422a;
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(133, 109, 83, 0.5);
-          box-shadow: 0 0 0 0.25rem rgba(133, 109, 83, 0.5);
+  background-color: #5f472e;
+  border-color: #5a422b;
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(133, 109, 84, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(133, 109, 84, 0.5);
 }
 
 .btn-check:checked + .btn-secondary,
 .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active,
 .show > .btn-secondary.dropdown-toggle {
   color: #fff;
-  background-color: #5a422a;
-  border-color: #543e28;
+  background-color: #5a422b;
+  border-color: #543e29;
 }
 
 .btn-check:checked + .btn-secondary:focus,
 .btn-check:active + .btn-secondary:focus, .btn-secondary:active:focus, .btn-secondary.active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(133, 109, 83, 0.5);
-          box-shadow: 0 0 0 0.25rem rgba(133, 109, 83, 0.5);
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(133, 109, 84, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(133, 109, 84, 0.5);
 }
 
 .btn-secondary:disabled, .btn-secondary.disabled {
   color: #fff;
-  background-color: #705335;
-  border-color: #705335;
+  background-color: #705336;
+  border-color: #705336;
 }
 
 .btn-success {
@@ -3554,36 +3562,36 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-secondary {
-  color: #705335;
-  border-color: #705335;
+  color: #705336;
+  border-color: #705336;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #705335;
-  border-color: #705335;
+  background-color: #705336;
+  border-color: #705336;
 }
 
 .btn-check:focus + .btn-outline-secondary, .btn-outline-secondary:focus {
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(112, 83, 53, 0.5);
-          box-shadow: 0 0 0 0.25rem rgba(112, 83, 53, 0.5);
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(112, 83, 54, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(112, 83, 54, 0.5);
 }
 
 .btn-check:checked + .btn-outline-secondary,
 .btn-check:active + .btn-outline-secondary, .btn-outline-secondary:active, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show {
   color: #fff;
-  background-color: #705335;
-  border-color: #705335;
+  background-color: #705336;
+  border-color: #705336;
 }
 
 .btn-check:checked + .btn-outline-secondary:focus,
 .btn-check:active + .btn-outline-secondary:focus, .btn-outline-secondary:active:focus, .btn-outline-secondary.active:focus, .btn-outline-secondary.dropdown-toggle.show:focus {
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(112, 83, 53, 0.5);
-          box-shadow: 0 0 0 0.25rem rgba(112, 83, 53, 0.5);
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(112, 83, 54, 0.5);
+          box-shadow: 0 0 0 0.25rem rgba(112, 83, 54, 0.5);
 }
 
 .btn-outline-secondary:disabled, .btn-outline-secondary.disabled {
-  color: #705335;
+  color: #705336;
   background-color: transparent;
 }
 
@@ -5384,7 +5392,7 @@ fieldset:disabled .btn {
 .alert-secondary {
   color: #433220;
   background-color: #e2ddd7;
-  border-color: #d4cbc2;
+  border-color: #d4cbc3;
 }
 
 .alert-secondary .alert-link {
@@ -7047,11 +7055,11 @@ fieldset:disabled .btn {
 }
 
 .link-secondary {
-  color: #705335;
+  color: #705336;
 }
 
 .link-secondary:hover, .link-secondary:focus {
-  color: #5a422a;
+  color: #5a422b;
 }
 
 .link-success {
@@ -7480,7 +7488,7 @@ fieldset:disabled .btn {
 }
 
 .border-secondary {
-  border-color: #705335 !important;
+  border-color: #705336 !important;
 }
 
 .border-success {
@@ -8384,7 +8392,7 @@ fieldset:disabled .btn {
 }
 
 .text-secondary {
-  color: #705335 !important;
+  color: #705336 !important;
 }
 
 .text-success {
@@ -8440,7 +8448,7 @@ fieldset:disabled .btn {
 }
 
 .bg-secondary {
-  background-color: #705335 !important;
+  background-color: #705336 !important;
 }
 
 .bg-success {
@@ -11511,190 +11519,57 @@ fieldset:disabled .btn {
 }
 
 body {
-  font-family: 'Source Sans Pro';
-  background-color: white !important;
-  background-position: 0 45px;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
+  font-family: 'Crimson Text', serif;
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  height: 100vh;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100vh;
-  margin: 0;
   overflow-y: scroll;
+  font-size: 18px;
 }
 
-body p {
-  font-size: 17px;
+.termsList h3, .termsList .h3 {
+  color: #705336;
 }
 
-.nav .link-color {
-  color: blue !important;
+.termsList li {
+  margin-left: 2rem;
 }
 
-.navbar_color {
-  background-color: transparent;
-}
-
-.logo {
-  max-height: 50px;
-  width: auto;
-}
-
-.navbar_font {
-  font-size: 20px;
-  color: grey;
-}
-
-.footer {
-  border-top: 1px dotted #615d5d;
-  margin-top: auto;
-}
-
-.footer .tile {
-  margin: 10px;
-  font-size: 32px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 60%;
-}
-
-.footer .tile a, .footer .tile a:hover, .footer .tile a:focus, .footer .tile a:active {
-  text-decoration: none;
-  color: white;
-}
-
-.author {
-  background-color: #82b637;
-}
-
-.author:hover {
-  background-color: #71a526;
-  color: lightgrey;
-}
-
-.email {
-  background-color: #DB4437;
-}
-
-.email:hover {
-  background-color: #CA3326;
-  color: lightgrey;
-}
-
-.fb {
-  background-color: #4267B2;
-}
-
-.fb:hover {
-  background-color: #3156A1;
-  color: lightgrey;
-}
-
-.in {
-  background-color: #0e76a8;
-}
-
-.in:hover {
-  background-color: #0d6597;
-  color: lightgrey;
-}
-
-.github {
-  background-color: #fff;
-}
-
-.github:hover {
-  background-color: #eee;
-  color: lightgrey;
-}
-
-/* Topic */
-.article p {
+/* Topic, user_view */
+.parIndent p {
   text-align: justify;
   text-indent: 30px;
-  margin-top: 1rem;
 }
 
-.my_user_image {
-  width: 90px;
-  height: 100%;
-  border-radius: 10px;
-}
-
-.user_comment_field {
-  border-radius: 10px;
-  border: 1px solid grey;
-  font-size: 15px;
-}
-
-/* Index */
-.divIndex {
-  height: 50vh;
-}
-
-.indexThumbnail {
-  height: 50%;
-}
-
-/* About */
-#parent {
-  background-color: black;
-  position: static;
-  overflow: hidden;
-  z-index: 1;
-}
-
-#first {
-  width: 100px;
-  height: 100px;
-  background-color: yellow;
-  z-index: 1;
-}
-
-#second {
-  margin-left: auto;
-  margin-right: auto;
+.userCard {
+  width: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: #74cfbf;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
-  background-color: blueviolet;
-  overflow: hidden;
-  z-index: 2;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
 }
 
-#third {
-  position: static;
-  width: 100px;
-  height: 100px;
-  background-color: green;
-  z-index: 3;
-}
-
-/* Galerry */
+/* Galerry, Topic */
 .divImg {
-  /* background-color: #333; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11720,49 +11595,41 @@ body p {
 }
 
 /* The Modal (background) */
-.modal {
+.myModal {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   padding-top: 5%;
-  /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
   background-color: black;
-  /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9);
-  /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
-.modal-content {
+.myModal-content {
   margin: auto;
   display: block;
   max-width: 70%;
+  max-height: 100%;
 }
 
 /* Caption of Modal Image */
-.caption {
+.myCaption {
   margin: auto;
   display: block;
-  max-width: 70%;
+  max-width: 60%;
   text-align: center;
   color: #ccc;
   padding: 10px 0;
-  height: 150px;
+  font-size: 20px;
 }
 
 /* Add Animation */
-.modal-content, .caption {
+.myModal-content, .caption {
   -webkit-animation-name: zoom;
   animation-name: zoom;
   -webkit-animation-duration: 0.6s;
@@ -11792,7 +11659,7 @@ body p {
 }
 
 /* The Close Button */
-.close {
+.myClose {
   position: absolute;
   top: 15px;
   right: 35px;
@@ -11803,7 +11670,7 @@ body p {
   transition: 0.3s;
 }
 
-.close:hover, .close:focus {
+.myClose:hover, .close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
@@ -11811,28 +11678,8 @@ body p {
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
-  .modal-content {
+  .myModal-content {
     width: 100%;
   }
-}
-
-.user_card {
-  width: 350px;
-  margin-top: auto;
-  margin-bottom: auto;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 10px;
-  border: 2px solid #52ba96;
-  border-radius: 5px;
 }
 /*# sourceMappingURL=style.css.map */

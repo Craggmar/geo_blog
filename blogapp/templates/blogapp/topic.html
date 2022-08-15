@@ -16,20 +16,20 @@
       </div>
       <!-- AUTHOR SECTION -->
       <div class="col-lg-3 order-1 order-lg-2 flex-column align-items-center border mb-3 mb-lg-0 user-select-none">        
-          <p class="fst-italic text-center fs-5 mt-2">Utworzono {{topic.date_created|date:"j. E Y"}}</p>
-          <p class="fst-italic text-center">przez:</p>
+          <p class="fst-italic text-center fs-4 mt-2">Utworzono {{topic.date_created|date:"j. E Y"}}</p>
+          <p class="fst-italic text-center fs-4">przez:</p>
           <a class="link-dark" href="{% url 'users:view_account' topic.owner.username %}">
             <img class="d-block img-thumbnail rounded-circle mx-auto" style="width:70%" src='{{topic.owner.bloguser.profile_picture.url}}' alt="User_image">          
             <p class="fst-italic text-center fs-4">{{topic.owner}}</p>
           </a>
           {% if user == topic.owner %}
             <ul class="list-inline mt-4 text-center">
-              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edytuj">
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edytuj temat">
                 <a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}">
                   <i class="fa-solid fa-pen-to-square fa-2x"></i>
                 </a>
               </li>
-              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuń">
+              <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Usuń temat">
                 <a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}">
                   <i class="fa-solid fa-trash-can fa-2x"></i>
                 </a>
@@ -40,16 +40,13 @@
                 </a>
               </li>
             </ul>         
-          {% endif %}
-          
-      </div>
-    
-  
+          {% endif %}          
+      </div>  
   <!-- MAIN ARTICLE -->
   <div class="col-lg-9 order-3 px-4 mb-5">
-    <p class="mx-3 fs-6 fst-italic text-muted">{{topic.header_image_description}}</p>
-    <div class="description_field pb-3 fst-italic"><h2 class="h4">{{topic.description}}</h2></div>
-    <div class="py-3 article border-3 border-top border-bottom">
+    <p class="mx-3 fst-italic text-muted">{{topic.header_image_description}}</p>
+    <div class="description_field pb-3"><h2 class="h4" style="text-align: justify;">{{topic.description}}</h2></div>
+    <div class="py-3 parIndent border-3 border-top border-bottom">
       {{topic.text|safe}}
     </div>
     <!-- COMMENTS SECTION -->
@@ -60,11 +57,11 @@
         <li>
           <div class="clearfix mb-4">
             <div class="float-start">
-              <img class="img-fluid  my_user_image rounded-circle" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
+              <img class="img-fluid rounded-circle" style="width:90px;" src='{{comment.owner.bloguser.profile_picture.url}}' alt="User_image">
             </div>
             <div class="overflow-hidden ps-2">
               <a class="text-decoration-none text-dark fw-bold ps-2" href="{% url 'users:view_account' comment.owner.username %}">{{comment.owner.bloguser.name|capfirst}}</a>
-              <div class="user_comment_field p-2 bg-white mb-1">{{ comment.text }}</div>
+              <div class="p-2 mb-1 bg-white border rounded-3" style="font-size: 15px;">{{ comment.text }}</div>
               <span class="fs-6">Wysłano: {{comment.date_created|date:"d-m-y;"}}{{comment.date_created|time:"H:i"}}
             </div>
           </div>
@@ -94,7 +91,7 @@
     {% if images %}   
       {% for image in images %}
       <div class="position-relative text-center">
-        <img id = myImg{{image.id}} class="img-thumbnail myImg position-relative" src="{{image.image.url}}" alt="{{image.description}}">
+        <img id = myImg{{image.id}} class="img-thumbnail myImg" src="{{image.image.url}}" alt="{{image.description}}">
         {% if user == topic.owner %}
           <form class="position-absolute bottom-0 end-0" action="{% url 'blogapp:delete_image' topic.id image.id %}" method="post">
             {% csrf_token %}
@@ -102,13 +99,13 @@
           </form>
         {% endif %}
       </div>  
-      <p class ="text-center">{{image.name}}</p>       
+      <p class ="text-center fs-5">{{image.name}}</p>       
 
-      <div id="myModal{{image.id}}" class="modal user-select-none">
-      <span id="close{{image.id}}" class="close">&times;</span>
-      <img class="modal-content" id="img{{image.id}}">
-      <div id="caption{{image.id}}" class="caption"></div>
-    </div>
+      <div id="myModal{{image.id}}" class="myModal user-select-none">
+        <span id="close{{image.id}}" class="myClose">&times;</span>
+        <img id="img{{image.id}}" class="myModal-content">
+        <div id="caption{{image.id}}" class="myCaption"></div>
+      </div>
     
  
     <script>
@@ -121,6 +118,7 @@
     var captionText = document.getElementById("caption{{image.id}}");
     img.onclick = function(){
       modal.style.display = "block";
+      document.body.style.overflow = 'hidden';
       modalImg.src = this.src;
       captionText.innerHTML = this.alt;
     }
@@ -131,6 +129,7 @@
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() { 
           modal.style.display = "none";
+          document.body.style.overflow = 'visible';
         }
         </script>
       {% endfor %}

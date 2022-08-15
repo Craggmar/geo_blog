@@ -4,32 +4,30 @@
 <header class="p-3 border-bottom mb-5">
   <span class="d-flex align-items-center text-dark text-decoration-none">
     <i class="fa-solid fa-magnifying-glass fa-2xl"></i>
-    <span class="fs-4 ms-3">Wyniki wyszukiwania dla: "{{searched}}"</span>
+    <span class="fs-4 ms-3 fw-bold">Wyniki wyszukiwania dla: "{{searched}}"</span>
   </span>
 </header>
-
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3">
-  {% for topic in topics %}
-    <div class="col">
-      <div class="card shadow-sm border-secondary divIndex">
-        <img class="img-fluid indexThumbnail" src="{{ topic.header_image.url }}">
-        <div class="card-body">
-          <h3 class="text-center"><a class="text-decoration-none text-dark" href="{% url 'blogapp:topic' topic.id %}" class="link-dark">{{topic.title}}</a></h3>
-          <p class="card-text">{{topic.short_description}}</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <a class="" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>
+{% if topics %}
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3">
+    {% for topic in topics %}
+      <div class="col">
+        <div class="card shadow-sm" style="min-height:100% !important;">
+          <img class="img-fluid" src="{{ topic.header_image.url }}">
+          <div class="card-body">
+            <h3 class="text-center fw-bold fs-2"><a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></h3>
+            <p class="card-text">{{topic.short_description}}</p>
+            <div class="d-flex justify-content-between mt-auto" style="height: 100%;">
+                <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>
+              <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
             </div>
-            <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
           </div>
         </div>
       </div>
-    </div>
-  {% empty %}
-    <li>
-      No topics found
-    </li>
-  {% endfor %}
+    {% endfor %}
+{% else %}
+    <p class="p-3 fw-bold text-center">Brak wyników</p>
+    <p class="text-center"><i class="fa-thin fa-loader"></i></p>
+{% endif %}
 </div>
 
 

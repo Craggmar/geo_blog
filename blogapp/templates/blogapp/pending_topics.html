@@ -11,7 +11,7 @@
 {% if topics %}
 <table class="table">
   <thead>
-    <tr class="">
+    <tr class="text-secondary">
       <th scope="col">Tytuł</th>
       <th scope="col">Utworzono</th>
       <th scope="col">Zmodyfikowano</th>
@@ -27,7 +27,7 @@
         <td><a class="text-decoration-none fst-italic text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
         <td>{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</td>
         <td>{{topic.date_modified|date:"d-m-y"}}; {{topic.date_modified|time:"H:i"}}</td>
-        <td ><a class="text-decoration-none fw-bold text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></td>
+        <td ><a class="text-dark" href="{% url 'users:view_account' topic.owner.username %}">{{topic.owner}}</a></td>
         <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square fa-xl"></i></a></td>
         <td class="ps-3"><a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can fa-xl"></i></a></td>
         <td>
@@ -42,7 +42,7 @@
 </table>
 {% else %}
   <p class="p-3 fw-bold text-center">Brak tematów oczekujących na zatwierdzenie</p>
-  <p class="text-center"><i class="fa-thin fa-loader"></i></p>
+  <p class="text-center"><i class="fa-light fa-loader"></i></p>
 {% endif %}
 
 {% endblock content %}

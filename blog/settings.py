@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     #myapps
     'blogapp',
     'users',
-    'api',
-    #Others
+    # 'api',
+    #others
     'rest_framework',
     'fontawesomefree',
     #default apps

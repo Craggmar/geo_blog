@@ -1,4 +1,5 @@
 {% extends 'blogapp/base_container.html' %}
+{% load static %}
 {% block content %}
 
 
@@ -9,60 +10,40 @@
   </span>
 </header>
 
-<div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">TWÓRZ</h1>
-    <p class="col-md-8 fs-4">Geostrat.pl jest serwisem o charakterze <b>popularno &ndash; naukowym</b>, umożliwiającym przede wszystkim publikację i edycję treści. Portal udostępnia możliwośc komentowania i dyskusji</p>
-    <button class="btn btn-primary btn-lg" type="button">Example button</button>
+<div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+  <div class="container-fluid col-md-7 p-5">
+    <h1 class="display-5 fw-bold ">Przęglądaj i komentuj</h1>
+    <p class="fs-4 text-secondary">Geostrat.pl jest serwisem o charakterze <b>popularno &ndash; naukowym</b>, umożliwiającym publikację i edycję treści. Portal udostępnia możliwośc komentowania i dyskusji.</p>
   </div>
+  <img class ="col-md-4 offset-md-1 img-fluid " src="{% static 'images/_defaults/geostrat1.PNG' %}" alt="image">
 </div>
 
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5 d-flex flex-column" style="text-align:right;">
-      <h1 class="display-5 fw-bold">KOMENTUJ</h1>
-      <p class="col-md-8 fs-4 align-self-end">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <img class ="col-md-4 img-fluid" src="{% static 'images/_defaults/geostrat5.PNG' %}" alt="image">
+    <div class="container-fluid col-md-7 offset-md-1 p-5 d-flex flex-column" style="text-align:right;">
+      <h1 class="display-5 fw-bold">Twórz własne tematy</h1>
+      <p class="fs-4 align-self-end text-secondary">Zamieszczaj własną treść zgodną z regulaminem, rozwijaj swoje konto i napisz coś o sobie, daj się poznać innym uzytkownikom!</p>
     </div>
   </div>
  
 
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <div class="container-fluid col-md-7 p-5">
       <h1 class="display-5 fw-bold">ROLA SERWISU</h1>
-      <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-      <button class="btn btn-primary btn-lg" type="button">Example button</button>
+      <p class=" fs-4 text-secondary">Strona nie jest serwisem przeznaczonym do masowego użytku, pwostał w celu prezentacji projektu we framework'u Django. Co nie zmienia faktu, że dalej z powodzeniem pełni rolę dydaktyczną!</p>
     </div>
+    <img class ="col-md-4 offset-md-1 img-fluid" src="{% static 'images/_defaults/geostrat2.PNG' %}" alt="image">
   </div>
 
-  <div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5 d-flex flex-column" style="text-align:right;">
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <img class ="col-md-4 img-fluid " src="{% static 'images/_defaults/default_user.png' %}" alt="image">
+    <div class="container-fluid col-md-7 offset-md-1 p-5 d-flex flex-column" style="text-align:right;">
       <h1 class="display-5 fw-bold">AUTOR</h1>
-      <p class="col-md-8 fs-4 align-self-end">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+      <p class="fs-4 align-self-end text-secondary">Jeśli masz jakieś pytania lub jesteś zainteresowany współpracą, wszelkie potrzebne informacje znajdziesz za pomocą poniższego linku.</p>
+      <button type ='submit' class="btn btn-secondary ff-rd text-ligh align-self-end" style="width:30%; min-height: 50px;"><a class ="link-light" href="#">Strona autora</a></button>
     </div>
+    
   </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
-
-<!-- Modal -->
-<div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
- 
 
 {% endblock content %}

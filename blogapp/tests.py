@@ -37,4 +37,3 @@ class URLDynamicTests(TestCase):
     response = self.client.get('/delete_topic/(15)/')
     self.assertEqual(response.status_code, 200)
 
-  print(len('Stratygrafia to dział geologii historycznej zajmujący się ustalaniem wieku i przyczyn rozmieszczenia skał w skorupie ziemskiej. Twórcą podstawowych praw stratygrafii był duński geolog Nicolaus Steno. Natomiast twórcą biostratygrafii był angielski inżynier William Smith, który w 1795 roku odkrył'))

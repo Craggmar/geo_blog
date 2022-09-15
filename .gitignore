@@ -1,5 +1,7 @@
 venv
-media
 __pycache__/
 *.sqlite3
 static/images/
+api
+
+!static/images/_defaults/

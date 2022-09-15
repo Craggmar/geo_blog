@@ -4,12 +4,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.models import Group, User
 from django.conf import settings
 
-from users.decorators import unauthenticated_user
 from .forms import CreateUserForm, EditUserProfileForm, CreateUserForm
 from.models import BlogUser
 from blogapp.models import Comment, Topic
-
-from.decorators import unauthenticated_user
 
 import os
 
@@ -23,13 +20,16 @@ def register(request):
         form = CreateUserForm(data=request.POST)       
         
         if form.is_valid():
-            new_user= form.save()
+            new_user= form.save()            
+            # add group
             permissions = request.POST.get('permissions')
-            group = Group.objects.get(name = permissions)
+            group = Group.objects.get(name = permissions) 
             new_user.groups.add(group)
+            # create extended user model one to one
             BlogUser.objects.create(user=new_user, name=new_user.username, email=new_user.email, permission_group=permissions)
-
+            # autologin
             login(request, new_user)
+            
             return redirect('blogapp:home')    
 
     context = {'form':form}

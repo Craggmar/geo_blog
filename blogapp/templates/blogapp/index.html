@@ -36,12 +36,14 @@
         <div class="col">
           <div class="card shadow-sm" style="min-height:100% !important;">
             <img class="img-fluid" src="{{ topic.header_image.url }}">
-            <div class="card-body">
-              <h3 class="text-center fw-bold fs-2"><a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title|upper}}</a></h3>
-              <p class="card-text">{{topic.short_description}}</p>              
-              <div class="d-flex justify-content-between mt-auto" style="height: 100%;">                
+            <div class="card-body position-relative">
+              <h3 class="text-center fw-bold fs-2">
+                <a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title|upper}}</a>
+              </h3>
+              <p class="card-text pb-3">{{topic.short_description}}</p>              
+              <div class="position-absolute bottom-0 start-50 translate-middle-x d-flex justify-content-between px-3 py-2" style="width:100%;">                
                   <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>                
-                <small class="text-muted">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
+                <small class="text-muted ms-auto">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
               </div>
             </div>
           </div>

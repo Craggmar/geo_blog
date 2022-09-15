@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from users.decorators import allowed_users
 
-import os
-import shutil
+import os, shutil
 
 from .models import Topic, Image
 from .forms import CommentForm, TopicForm, ImageForm
@@ -60,10 +59,6 @@ def gallery(request):
     context={"images":all_images}
     return render(request, 'blogapp/gallery.html',context)
 
-@login_required
-def contact(request):
-    return render(request, 'blogapp/contact.html')
-
 def search_topic(request):
     all_topics = Topic.objects.filter(confirmed=True).order_by('-date_created')
     topics = []
@@ -96,6 +91,7 @@ def topic(request, topic_id, image_id=None):
     context ={'topic': topic, 'comments': comments, 'form': form,'images':images,}
     return render(request, 'blogapp/topic.html', context)
 
+@login_required
 def my_topics(request):    
     # topics = Topic.objects.filter(owner=request.user).order_by('-date_created')
     topics = request.user.topic_set.order_by('-date_created')
@@ -103,6 +99,7 @@ def my_topics(request):
     context = {'topics': topics,}
     return render(request, 'blogapp/my_topics.html', context)
 
+@login_required
 @permission_required('is_staff', raise_exception=True)
 def pending_topics(request):
     topics = Topic.objects.filter(confirmed=False).order_by('-date_created')
@@ -110,6 +107,8 @@ def pending_topics(request):
     context = {'topics': topics,}
     return render(request, 'blogapp/pending_topics.html', context)
 
+@login_required
+@permission_required('is_staff', raise_exception=True)
 def confirm_topic(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     if request.method =='POST':        
@@ -119,7 +118,6 @@ def confirm_topic(request, topic_id):
 
 @login_required
 @permission_required('blogapp.add_topic', raise_exception=True)
-# @allowed_users(allowed = ['admins', 'moderators'])
 def new_topic(request):
     if request.method != 'POST':
         form = TopicForm()
@@ -129,6 +127,7 @@ def new_topic(request):
             new_topic = form.save(commit=False)
             new_topic.owner= request.user
             new_topic.save()
+            # create media dir
             if not new_topic.title in os.listdir(settings.MEDIA_ROOT):
                 os.mkdir(os.path.join(settings.MEDIA_ROOT, new_topic.title))
             return redirect('blogapp:home')
@@ -138,6 +137,7 @@ def new_topic(request):
 
 
 @login_required
+@permission_required('blogapp.edit_topic', raise_exception=True)
 def edit_topic(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
 
@@ -159,6 +159,7 @@ def delete_topic(request, topic_id):
     topic = get_object_or_404(Topic, id=topic_id)
     if request.method =='POST':
         topic.delete()
+        #del media dir
         if  topic.title in os.listdir(settings.MEDIA_ROOT):                
             shutil.rmtree(os.path.join(settings.MEDIA_ROOT, topic.title))
         return redirect('blogapp:home')
